@@ -1,0 +1,12 @@
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\bin\Debug\netstandard2.0\UsingMessagingCenter.deps.json
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\bin\Debug\netstandard2.0\UsingMessagingCenter.dll
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\bin\Debug\netstandard2.0\UsingMessagingCenter.pdb
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.csprojAssemblyReference.cache
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.AssemblyInfoInputs.cache
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.AssemblyInfo.cs
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.csproj.CoreCompileInputs.cache
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.dll
+C:\Repos\Apps\MobileApp\SvichEx\Xamarin_Forms___MessagingCenter\UsingMessagingCenter\obj\Debug\netstandard2.0\UsingMessagingCenter.pdb

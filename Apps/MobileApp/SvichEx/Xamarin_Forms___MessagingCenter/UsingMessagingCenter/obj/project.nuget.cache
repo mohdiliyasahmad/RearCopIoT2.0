@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "31Xa5EX5f6qv7eUc/V/GzQHRR5TPpXpUb5+gZb7oAmHPO1tq7SDQXnx4vxtXti+R5v8Bt0relY73ulyU8ENX6w==",
+  "success": true,
+  "projectFilePath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\Xamarin_Forms___MessagingCenter\\UsingMessagingCenter\\UsingMessagingCenter.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\xamarin.forms\\4.8.0.1269\\xamarin.forms.4.8.0.1269.nupkg.sha512"
+  ],
+  "logs": []
+}

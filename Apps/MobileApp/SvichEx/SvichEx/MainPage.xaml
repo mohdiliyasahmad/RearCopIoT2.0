@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SvichEx.MainPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="txtToolbar" Text="Setting" Order="Default" Priority="0" Clicked="Button_Pressed"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout BackgroundColor="DarkSlateGray">
+        <StackLayout>
+            <ScrollView Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Default">
+                <Grid x:Name="grdControls">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button ClassId="" x:Name="btnTab1" FontSize="Default" Text="Tab1" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab2" FontSize="Default" Text="Tab2" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab3" FontSize="Default" Text="Tab3" Grid.Row="1" Grid.Column="2" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab4" FontSize="Default" Text="Tab4" Grid.Row="1" Grid.Column="3" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab5" FontSize="Default" Text="Tab5" Grid.Row="1" Grid.Column="4" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab6" FontSize="Default" Text="Tab6" Grid.Row="1" Grid.Column="5" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+        <StackLayout >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition>
+                    </ColumnDefinition>
+                    <ColumnDefinition>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblDeviceTitle" Grid.Column="0" Grid.Row="1" TextColor="White" Text="Device status" HorizontalOptions="End" FontSize="Subtitle"/>
+                <Label x:Name="lblDeviceStatus" Grid.Column="1" Grid.Row="1" TextColor="White" Text="Online"  HorizontalOptions="Start" VerticalOptions="End" FontSize="Micro"  BackgroundColor="DarkSlateGray"/>
+            </Grid>
+
+        </StackLayout>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <ScrollView FlowDirection="LeftToRight">
+                <Grid x:Name="stkButtons">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto" >
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto" >
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="txtSwitch1" Text="Switch 1" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="0" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch2" Text="Switch 2" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="1" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch3" Text="Switch 3" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch4" Text="Switch 4" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="3" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch5" Text="Switch 5" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="4" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch6" Text="Switch 6" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="5" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch7" Text="Switch 7" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="6" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+                    <Label x:Name="txtSwitch8" Text="Switch 8" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="7" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
+
+                    <Switch ClassId="v1" x:Name="swhSwitch1" IsToggled="False" Grid.Column="1" Grid.Row="0"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v2" x:Name="swhSwitch2" IsToggled="false" Grid.Column="1" Grid.Row="1"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v3" x:Name="swhSwitch3" IsToggled="false" Grid.Column="1" Grid.Row="2"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v4" x:Name="swhSwitch4" IsToggled="false" Grid.Column="1" Grid.Row="3"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v5" x:Name="swhSwitch5" IsToggled="false" Grid.Column="1" Grid.Row="4"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v6" x:Name="swhSwitch6" IsToggled="false" Grid.Column="1" Grid.Row="5"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v7" x:Name="swhSwitch7" IsToggled="false" Grid.Column="1" Grid.Row="6"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v8" x:Name="swhSwitch8" IsToggled="false" Grid.Column="1" Grid.Row="7"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+        <Label x:Name="lblError" Text="error" TextColor="Red" HorizontalOptions="StartAndExpand"></Label>
+        <Label x:Name="lblVersion" Text="Version : 1.0" TextColor="Green" HorizontalOptions="EndAndExpand"></Label>
+    </StackLayout>
+
+</ContentPage>
+  

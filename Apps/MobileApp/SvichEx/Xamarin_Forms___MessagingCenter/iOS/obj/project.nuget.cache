@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "w+AHV8cy4xwLvKYj3bhl1XAGr6SEIrvEmIJFzq6gg9iIbhTSmMFCESriH5hdidEpPKzQXJbHJ2Ir3W/DGnHAUg==",
+  "success": true,
+  "projectFilePath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\Xamarin_Forms___MessagingCenter\\iOS\\UsingMessagingCenter.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\xamarin.forms\\4.8.0.1269\\xamarin.forms.4.8.0.1269.nupkg.sha512"
+  ],
+  "logs": []
+}

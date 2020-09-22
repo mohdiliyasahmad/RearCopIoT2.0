@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
+             xmlns:local="clr-namespace:SvichEx.ViewModel"
+             mc:Ignorable="d"
+             x:Class="SvichEx.SettingPage">
+
+    <ContentPage.BindingContext>
+        <local:SettingViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout BackgroundColor="DarkSlateGray">
+        <Label Text="Device Setting" 
+               HorizontalOptions="Center" 
+               VerticalOptions="CenterAndExpand" FontSize="Title" TextColor="White" />
+
+        <ScrollView FlowDirection="LeftToRight">
+            <Grid FlowDirection="LeftToRight" Margin="10" x:Name="grdControls">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="100">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="100">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="50">
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <zxing:ZXingScannerView Grid.Row="1" Grid.Column="0" x:Name="scanView1" 
+                                    OnScanResult="scanView1_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+                <zxing:ZXingScannerView Grid.Row="3" Grid.Column="0" x:Name="scanView2" 
+                                    OnScanResult="scanView2_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+                <zxing:ZXingScannerView Grid.Row="5" Grid.Column="0" x:Name="scanView3" 
+                                    OnScanResult="scanView3_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+                <zxing:ZXingScannerView Grid.Row="7" Grid.Column="0" x:Name="scanView4" 
+                                    OnScanResult="scanView4_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+                <zxing:ZXingScannerView Grid.Row="9" Grid.Column="0" x:Name="scanView5" 
+                                    OnScanResult="scanView4_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+                <zxing:ZXingScannerView Grid.Row="11" Grid.Column="0" x:Name="scanView6" 
+                                    OnScanResult="scanView4_OnScanResult" IsScanning="false"
+                                    WidthRequest="100" HeightRequest="100" IsEnabled="False"/>
+
+                <Button x:Name="btnScanView1" Grid.Column="1" Grid.Row="1" Text="Scan"></Button>
+                <Button x:Name="btnScanView2" Grid.Column="1" Grid.Row="3" Text="Scan"></Button>
+                <Button x:Name="btnScanView3" Grid.Column="1" Grid.Row="5" Text="Scan"></Button>
+                <Button x:Name="btnScanView4" Grid.Column="1" Grid.Row="7" Text="Scan"></Button>
+                <Button x:Name="btnScanView5" Grid.Column="1" Grid.Row="9" Text="Scan"></Button>
+                <Button x:Name="btnScanView6" Grid.Column="1" Grid.Row="11" Text="Scan"></Button>
+
+                <Label x:Name="lblId1" Grid.Column="1" Grid.Row="1"  IsVisible="False" ></Label>
+                <Label x:Name="lblId2" Grid.Column="1" Grid.Row="3"  IsVisible="False" ></Label>
+                <Label x:Name="lblId3" Grid.Column="1" Grid.Row="5"  IsVisible="False" ></Label>
+                <Label x:Name="lblId4" Grid.Column="1" Grid.Row="7"  IsVisible="False" ></Label>
+                <Label x:Name="lblId5" Grid.Column="1" Grid.Row="9"  IsVisible="False" ></Label>
+                <Label x:Name="lblId6" Grid.Column="1" Grid.Row="11" IsVisible="False" ></Label>
+
+                <Switch x:Uid="" x:Name="tglScanView1" IsToggled="false" Grid.Column="3" Grid.Row="1" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch x:Uid="" x:Name="tglScanView2" IsToggled="false" Grid.Column="3" Grid.Row="3" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch x:Uid="" x:Name="tglScanView3" IsToggled="false" Grid.Column="3" Grid.Row="5" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch x:Uid="" x:Name="tglScanView4" IsToggled="false" Grid.Column="3" Grid.Row="7" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch x:Uid="" x:Name="tglScanView5" IsToggled="false" Grid.Column="3" Grid.Row="9" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch x:Uid="" x:Name="tglScanView6" IsToggled="false" Grid.Column="3" Grid.Row="11" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+
+                <Editor x:Name="txtScanView1" Grid.Column="2" Grid.Row="1" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+                <Editor x:Name="txtScanView2" Grid.Column="2" Grid.Row="3" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+                <Editor x:Name="txtScanView3" Grid.Column="2" Grid.Row="5" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+                <Editor x:Name="txtScanView4" Grid.Column="2" Grid.Row="7" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+                <Editor x:Name="txtScanView5" Grid.Column="2" Grid.Row="9" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+                <Editor x:Name="txtScanView6" Grid.Column="2" Grid.Row="11" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
+
+                <Editor x:Name="txtDeviceCode1" Placeholder="Device Code..." Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+                <Editor x:Name="txtDeviceCode2" Placeholder="Device Code..." Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+                <Editor x:Name="txtDeviceCode3" Placeholder="Device Code..." Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+                <Editor x:Name="txtDeviceCode4" Placeholder="Device Code..." Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+                <Editor x:Name="txtDeviceCode5" Placeholder="Device Code..." Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+                <Editor x:Name="txtDeviceCode6" Placeholder="Device Code..." Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Subtitle" TextColor="White" />
+
+                <Label Text="1" Grid.Row="0" Grid.Column="2" FontSize="Micro" TextColor="White" HorizontalOptions="Start"/>
+                <Label Text="2" Grid.Row="2" Grid.Column="2" FontSize="Micro" TextColor="White"  HorizontalOptions="Start" />
+                <Label Text="3" Grid.Row="4" Grid.Column="2" FontSize="Micro" TextColor="White"  HorizontalOptions="Start"/>
+                <Label Text="4" Grid.Row="6" Grid.Column="2" FontSize="Micro" TextColor="White"  HorizontalOptions="Start"/>
+                <Label Text="5" Grid.Row="8" Grid.Column="2" FontSize="Micro" TextColor="White"  HorizontalOptions="Start"/>
+                <Label Text="6" Grid.Row="10" Grid.Column="2" FontSize="Micro" TextColor="White"  HorizontalOptions="Start"/>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode1}" Grid.Row="0" Grid.Column="3" HorizontalOptions="End" 
+                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode2}" Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
+                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode3}"  Grid.Row="4" Grid.Column="3" 
+                        HorizontalOptions="End" Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode4}" Grid.Row="6" Grid.Column="3" 
+                        HorizontalOptions="End" Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode5}" Grid.Row="8" Grid.Column="3" 
+                        HorizontalOptions="End" Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+
+                <Button BindingContext="{x:Reference Name=txtDeviceCode6}" Grid.Row="10" Grid.Column="3" 
+                        HorizontalOptions="End" Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+            </Grid>
+        </ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+
+                </ColumnDefinition>
+                <ColumnDefinition>
+
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="1" Text="Cancel"  BackgroundColor="Red" CornerRadius="60" Clicked="btnCancel_Clicked"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Text="Save"  BackgroundColor="Green" CornerRadius="60" Clicked="btnSave_Clicked"></Button>
+        </Grid>
+
+        <Label x:Name="lblError" Text="error" TextColor="Red" HorizontalOptions="StartAndExpand"></Label>
+        <Label x:Name="lblVersion" Text="Version : 1.0" TextColor="Green" HorizontalOptions="EndAndExpand"></Label>
+
+    </StackLayout>
+
+</ContentPage>

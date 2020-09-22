@@ -1,0 +1,15 @@
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\bin\Release\netstandard2.1\SvichEx.deps.json
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\bin\Release\netstandard2.1\SvichEx.dll
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\bin\Release\netstandard2.1\ref\SvichEx.dll
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\bin\Release\netstandard2.1\SvichEx.pdb
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\App.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\MainPage.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SettingDetails.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\Settings.xaml.g.cs
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SvichEx.AssemblyInfoInputs.cache
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SvichEx.AssemblyInfo.cs
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SvichEx.csproj.CoreCompileInputs.cache
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\XamlC.stamp
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SvichEx.dll
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\ref\SvichEx.dll
+C:\Repos\Apps\MobileApp\SvichEx\SvichEx\obj\Release\netstandard2.1\SvichEx.pdb
