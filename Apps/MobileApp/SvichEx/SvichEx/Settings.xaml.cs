@@ -66,7 +66,7 @@ namespace SvichEx
             Button btn = (Button)(sender);
             Editor lbl = (Editor)btn.BindingContext;
             ValidateInput(lbl.Text);
-            settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "Dummy" : lbl.Text;
+            settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "No Device" : lbl.Text;
             Navigation.PushAsync(new SettingDetails(settingItem));
         }
 
@@ -101,7 +101,7 @@ namespace SvichEx
             
                 settingItem = new SettingItem();
 
-                settingItem.DeviceCode = string.IsNullOrEmpty(ctldeviceCode.Text) ? "" : ctldeviceCode.Text;
+                settingItem.DeviceCode = string.IsNullOrEmpty(ctldeviceCode.Text) ? "No Device " + i : ctldeviceCode.Text;
                 settingItem.NickName = string.IsNullOrEmpty(ctlnickname.Text) ? "" : ctlnickname.Text;
                 settingItem.IsVisible = ctltgl.IsToggled;
                 settingItem.Id = int.Parse(string.IsNullOrEmpty(ctllbl.Text) ? "0" : ctllbl.Text);

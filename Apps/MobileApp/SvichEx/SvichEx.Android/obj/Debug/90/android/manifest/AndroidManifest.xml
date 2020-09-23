@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.svichex">
-  <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.svichex" android:installLocation="auto">
+  <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="28" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.FLASHLIGHT" />
-  <application android:label="SvichEx.Android" android:name="android.app.Application" android:allowBackup="true" android:icon="@mipmap/icon" android:debuggable="true">
+  <application android:label="SvichEx" android:debuggable="true" android:name="android.app.Application" android:allowBackup="true" android:icon="@mipmap/icon">
     <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/icon" android:label="SvichEx" android:theme="@style/MainTheme" android:name="crc64ccfa8275dc04b3dc.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

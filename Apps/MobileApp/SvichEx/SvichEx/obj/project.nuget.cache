@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w+CW/wDIiqxz0vMZ6ZTsN65Ma8x46uHKCXycjdx8rfYVuO/7Tl5YccXFNdo8UYySKpUEjR9hMlICSmYluKU9wA==",
+  "dgSpecHash": "yyNqBSWPe9unWrWGzQr0CrKF6bWg/EBWI1BjMlOGMM6KLkyKkf9kLjU8XXgOUqkSy4Fw5c+WqMt8KZSMhRvR6A==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj",
+  "projectFilePath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",

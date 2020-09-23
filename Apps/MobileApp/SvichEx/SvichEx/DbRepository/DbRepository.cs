@@ -197,6 +197,13 @@ namespace SvichEx.DbRepository
             return o;
         }
 
+
+        public Task<int> UpdateAppControlAsync(AppControl item)
+        {
+            var o = Database.UpdateAsync(item);
+            return o;
+        }
+
         public int DeleteAppControlByDeviceCodeAsync(string deviceCode)
         {
             try

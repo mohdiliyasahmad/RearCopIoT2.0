@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VnK61zyDT0+ohwzjCNiWChSjPVl3Voi+C6YRyD8V5LeamlDN8WKOo/gR5psZiYK7byev9ZuzdADQZ5Pw/ejfTQ==",
+  "dgSpecHash": "rIIf+UDKtwPPb0FAWIVGJlsVKq77W8ZzVlNmfcSS7QZErGi6p4m27EXLKarG4wd03Tp1aW40jD0HuWJQwuu/5g==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx.Android\\SvichEx.Android.csproj",
+  "projectFilePath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.Android\\SvichEx.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\fastandroidcamera\\2.0.0\\fastandroidcamera.2.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",

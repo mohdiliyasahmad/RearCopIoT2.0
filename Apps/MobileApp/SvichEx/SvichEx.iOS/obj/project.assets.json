@@ -1758,11 +1758,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
+      "projectUniqueName": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
       "projectName": "SvichEx.iOS",
-      "projectPath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
+      "projectPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\obj\\",
+      "outputPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -1783,8 +1783,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj": {
-              "projectPath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj"
+            "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj": {
+              "projectPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj"
             }
           }
         }

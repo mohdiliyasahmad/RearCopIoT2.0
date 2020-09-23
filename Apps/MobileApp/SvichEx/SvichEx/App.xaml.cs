@@ -14,9 +14,7 @@ namespace SvichEx
     {
         static AppSettingDatabase database;
         public const string ApiUrl = "https://rciot.azure-api.net/gateway/";
-        public RestService ApiService { get; set; }
-
-
+ 
         public static AppSettingDatabase Database
         {
             get
@@ -28,6 +26,9 @@ namespace SvichEx
                 return database;
             }
         }
+
+
+
 
         public App()
         {

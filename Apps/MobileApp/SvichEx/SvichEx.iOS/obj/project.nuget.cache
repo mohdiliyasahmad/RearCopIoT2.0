@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KwDK+WgiPu7xTEDXDOJ8qpo+DbAX5W6rA/EK/2csv1GrStpzvZI9WGQRmYl987zvu2I5l2lL6bekReVYTtHijw==",
+  "dgSpecHash": "Ep0qLeJae96G1zn1YjbjEbbR9csg20200lGxZswvuME/H+J3laqVd5I87J8Ous2Ihp/5TULdLOnQg0o4XPRvuQ==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
+  "projectFilePath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",

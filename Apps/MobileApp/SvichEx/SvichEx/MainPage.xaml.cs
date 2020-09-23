@@ -16,14 +16,13 @@ namespace SvichEx
     public partial class MainPage : ContentPage
     {
         public RestService ApiService { get; set; }
-
         public string DeviceCode { get; set; }
-
         public bool IsDeviceEnabled { get; set; }
 
         public MainPage()
         {
             InitializeComponent();
+            ApiService = new RestService();
         }
 
         protected override void OnAppearing()
@@ -39,22 +38,30 @@ namespace SvichEx
             }
         }
 
-        private void PopulateSwitches()
+        private void PopulateSwitchesByDeviceCode()
         {
-            var swiches = App.Database.GetItemDetailAsync(DeviceCode).Result;
+            var swiches = App.Database.GetItemDetailAsync(DeviceCode);
             PopulateElements(swiches);
         }
 
 
-
-        private void PopulateElements(List<SettingItemDetail> swiches)
+        private void PopulateElements(Task<List<SettingItemDetail>> swiches)
         {
             string lbl = "txtSwitch", tgl = "swhSwitch";
             int ctr = 1;
             Label ctlLbl;
             Switch ctlSwitch;
 
-            foreach (var item in swiches)
+            for (int i = 0; i < 8; i++)
+            {
+                ctlLbl = stkButtons.FindByName<Label>(lbl + ctr.ToString());
+                ctlSwitch = stkButtons.FindByName<Switch>(tgl + ctr.ToString());
+                ctlLbl.IsVisible = false;
+                ctlSwitch.IsVisible = false;
+            }
+
+
+            foreach (var item in swiches.Result)
             {
                 ctlLbl = stkButtons.FindByName<Label>(lbl + ctr.ToString());
                 ctlSwitch = stkButtons.FindByName<Switch>(tgl + ctr.ToString());
@@ -67,13 +74,23 @@ namespace SvichEx
         private void PopulateDetails(SettingItemDetail pitem, Label txt, Switch swch, string edtName, string tglName)
         {
             var obj = App.Database.GetAppControlAsync(pitem);
+            
             foreach (var item in obj)
             {
                 if (item != null && item.ControlName == edtName)
                 {
-                    txt.Text = item.ControlName == edtName ? item.Value : "";
+                    txt.Text = item.Value;
                     txt.IsVisible = item.IsVisible;
                     swch.IsVisible = item.IsVisible;
+                }
+
+                if (item != null && item.ControlName == tglName)
+                {
+                    if (item.IsVisible)
+                    {
+                        Application.Current.Properties[swch.Id.ToString()] = item;
+                        swch.IsToggled = string.IsNullOrEmpty(item.Value) ? false : bool.Parse(item.Value);
+                    }
                 }
             }
 
@@ -131,6 +148,7 @@ namespace SvichEx
         {
             try
             {
+                DeviceCode = ((Button)sender).ClassId;
                 IsDeviceEnabled = false;
                 SetTab((Button)sender);
             }
@@ -159,7 +177,7 @@ namespace SvichEx
                 ResetElements();
                 ctlBtn.BackgroundColor = Color.Green;
                 DeviceCode = ctlBtn.ClassId;
-                PopulateSwitches();
+                PopulateSwitchesByDeviceCode();
                 _ = SetDeviceOnlineStatusAsync();
             }
             catch (Exception)
@@ -174,8 +192,6 @@ namespace SvichEx
         {
             lblDeviceStatus.Text = "OffLine";
             lblDeviceStatus.BackgroundColor = Color.Red;
-
-            ApiService = new RestService();
 
             try
             {
@@ -197,7 +213,7 @@ namespace SvichEx
                 //throw;
             }
 
-          
+
         }
 
         private void swhSwitch_Toggled(object sender, ToggledEventArgs e)
@@ -205,9 +221,11 @@ namespace SvichEx
             var tgl = (Switch)sender;
             var pin = tgl.ClassId;
             var value = tgl.IsToggled ? 1 : 0;
-
+            var item = (AppControl)Application.Current.Properties[tgl.Id.ToString()];
+            item.Value = tgl.IsToggled.ToString();
             try
             {
+                _ = App.Database.UpdateAppControlAsync(item);
                 _ = ApiService.SwitchOnOff(pin, value, DeviceCode);
             }
             catch (Exception ex)

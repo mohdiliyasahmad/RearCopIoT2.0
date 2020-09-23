@@ -68,7 +68,7 @@ namespace SvichEx
             pageControl = new AppControl { ControlName = edtName, Value = switchName};
             objSwitch.AppSwitch = pageControl;
 
-            pageControl = new AppControl { ControlName = tglName, Value = isVisible.ToString() };
+            pageControl = new AppControl { ControlName = tglName, IsVisible =isVisible};
             objSwitch.AppToggle = pageControl;
 
             return objSwitch;
@@ -86,7 +86,7 @@ namespace SvichEx
                 item.AppToggle.ItemId = itemid;
                 item.AppSwitch.DeviceCode = DeviceSetting.DeviceCode;
                 item.AppToggle.DeviceCode = DeviceSetting.DeviceCode;
-                item.AppSwitch.IsVisible = bool.Parse(item.AppToggle.Value);
+                item.AppSwitch.IsVisible = item.AppToggle.IsVisible;
 
                 App.Database.SaveAppControlAsync(item.AppSwitch);
                 App.Database.SaveAppControlAsync(item.AppToggle);
@@ -125,7 +125,7 @@ namespace SvichEx
 
                 if (item != null && item.ControlName == tglName)
                 {
-                    swch.IsToggled = bool.Parse(item.Value);
+                    swch.IsToggled = item.IsVisible;// string.IsNullOrEmpty(item.Value) ? false: bool.Parse(item.Value);
                 }
             }
 
