@@ -40,7 +40,18 @@ namespace SvichEx
 
         private void PopulateSwitchesByDeviceCode()
         {
-            var swiches = App.Database.GetItemDetailAsync(DeviceCode);
+            Task<List<SettingItemDetail>> swiches;
+
+            if (!Application.Current.Properties.ContainsKey(DeviceCode))
+            {
+                swiches = App.Database.GetItemDetailAsync(DeviceCode);
+                Application.Current.Properties[DeviceCode] = swiches;
+            }
+            else
+            {
+                swiches = (Task<List<SettingItemDetail>>)Application.Current.Properties[DeviceCode];
+            }
+           
             PopulateElements(swiches);
         }
 

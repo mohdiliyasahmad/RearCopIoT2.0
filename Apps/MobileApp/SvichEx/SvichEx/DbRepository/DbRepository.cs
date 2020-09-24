@@ -139,9 +139,10 @@ namespace SvichEx.DbRepository
 
         public Task<List<SettingItemDetail>> GetItemDetailAsync(string deviceCode)
         {
-            //return Database.Table<SettingItemDetail>().Where(i => i.DeviceCode == deviceCode).ToListAsync();
-            return Database.QueryAsync<SettingItemDetail>("SELECT * FROM [SettingItemDetail] WHERE [DeviceCode] = '" + deviceCode + "'");
-            //Where DeviceCode = '" + deviceCode + "'"
+            return Database.Table<SettingItemDetail>().Where(i => i.DeviceCode == deviceCode).ToListAsync();
+            //return Database.QueryAsync<SettingItemDetail>("SELECT * FROM [SettingItemDetail] WHERE [DeviceCode] = '" + deviceCode + "'");
+            //return Database.QueryAsync<SettingItemDetail>("SELECT  [SettingItemDetail].*, [AppControl].* FROM [SettingItemDetail] INNER JOIN [AppControl] ON [AppControl].[ItemId] = [SettingItemDetail].[ID] WHERE [SettingItemDetail].[DeviceCode] ='" + deviceCode + "'");
+            //Where DeviceCode = '" + deviceCode + "'" AppControl
         }
 
         private bool IsExistSettingItemDetail(string deviceCode)
@@ -157,9 +158,17 @@ namespace SvichEx.DbRepository
 
         public int SaveItemDetailAsync(SettingItemDetail item)
         {
-            _ = Database.InsertAsync(item).Result;
-            var obj = Database.QueryAsync<SettingItemDetail>("Select Max(id) as [Id] from SettingItemDetail").Result.FirstOrDefault();
-            return obj.Id;
+            if (item.Id != 0)
+            {
+                _ = Database.UpdateAsync(item).Result;
+                return item.Id;
+            }
+            else
+            {
+                _ = Database.InsertAsync(item).Result;
+                var obj = Database.QueryAsync<SettingItemDetail>("Select Max(id) as [Id] from SettingItemDetail").Result.FirstOrDefault();
+                return obj.Id;
+            }
         }
 
         public Task<int> DeleteItemDetailAsync(SettingItemDetail item)
@@ -186,7 +195,14 @@ namespace SvichEx.DbRepository
 
         public int SaveAppControlAsync(AppControl item)
         {
-            return Database.InsertAsync(item).Result;
+            if (item.Id != 0)
+            {
+                return Database.UpdateAsync(item).Result;
+            }
+            else
+            {
+                return Database.InsertAsync(item).Result;
+            }
         }
 
         public List<AppControl> GetAppControlAsync(SettingItemDetail item)
@@ -197,6 +213,13 @@ namespace SvichEx.DbRepository
             return o;
         }
 
+        public AppControl GetAppControlElementAsync(SettingItemDetail item, string controlName)
+        {
+            // SQL queries are also possible
+            //return Database.<AppControl>("SELECT * FROM [AppControl] WHERE ItemId="+ item.Id);
+            var o = Database.Table<AppControl>().Where(w => w.ItemId == item.Id && w.ControlName == controlName && w.DeviceCode == item.DeviceCode).FirstOrDefaultAsync().Result;
+            return o;
+        }
 
         public Task<int> UpdateAppControlAsync(AppControl item)
         {

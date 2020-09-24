@@ -59,14 +59,14 @@
                             <Editor x:Name="txtSwitch7" Grid.Row="6" Grid.Column="1"  Placeholder="Fan, Light" TextColor="White" PlaceholderColor="SlateGray" VerticalOptions="Center"></Editor>
                             <Editor x:Name="txtSwitch8" Grid.Row="7" Grid.Column="1"  Placeholder="Fan, Light" TextColor="White" PlaceholderColor="SlateGray" VerticalOptions="Center"></Editor>
 
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch1" IsToggled="False" Grid.Column="2" Grid.Row="0"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange" />
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch2" IsToggled="false" Grid.Column="2" Grid.Row="1"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch3" IsToggled="false" Grid.Column="2" Grid.Row="2"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch4" IsToggled="false" Grid.Column="2" Grid.Row="3"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch5" IsToggled="false" Grid.Column="2" Grid.Row="4"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch6" IsToggled="false" Grid.Column="2" Grid.Row="5"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch7" IsToggled="false" Grid.Column="2" Grid.Row="6"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                            <Switch x:Uid="swhSwitch1" x:Name="swhSwitch8" IsToggled="false" Grid.Column="2" Grid.Row="7"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch1" IsToggled="False" Grid.Column="2" Grid.Row="0"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange" />
+                            <Switch x:Name="swhSwitch2" IsToggled="false" Grid.Column="2" Grid.Row="1"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch3" IsToggled="false" Grid.Column="2" Grid.Row="2"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch4" IsToggled="false" Grid.Column="2" Grid.Row="3"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch5" IsToggled="false" Grid.Column="2" Grid.Row="4"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch6" IsToggled="false" Grid.Column="2" Grid.Row="5"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch7" IsToggled="false" Grid.Column="2" Grid.Row="6"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                            <Switch x:Name="swhSwitch8" IsToggled="false" Grid.Column="2" Grid.Row="7"  HorizontalOptions="CenterAndExpand" Scale="2" Margin="25" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
 
                         </Grid>
                     </ScrollView>
