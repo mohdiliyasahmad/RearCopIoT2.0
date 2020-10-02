@@ -78,6 +78,7 @@ char * string2char(String command){
 
 void initDeviceInfo()
 {
+  
   deviceId = WiFi.macAddress();
   deviceId.replace(":", String(ESP.getChipId()));
  

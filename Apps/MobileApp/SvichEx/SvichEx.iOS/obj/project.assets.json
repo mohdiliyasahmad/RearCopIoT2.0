@@ -1752,24 +1752,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Users\\admin\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
+      "projectUniqueName": "C:\\Repo\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
       "projectName": "SvichEx.iOS",
-      "projectPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\obj\\",
+      "projectPath": "C:\\Repo\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\SvichEx.iOS.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Repo\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1783,8 +1783,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj": {
-              "projectPath": "C:\\Repos\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj"
+            "C:\\Repo\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj": {
+              "projectPath": "C:\\Repo\\RearCopIoT2.0\\Apps\\MobileApp\\SvichEx\\SvichEx\\SvichEx.csproj"
             }
           }
         }

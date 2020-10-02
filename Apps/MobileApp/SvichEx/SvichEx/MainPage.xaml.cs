@@ -41,17 +41,7 @@ namespace SvichEx
         private void PopulateSwitchesByDeviceCode()
         {
             Task<List<SettingItemDetail>> swiches;
-
-            if (!Application.Current.Properties.ContainsKey(DeviceCode))
-            {
-                swiches = App.Database.GetItemDetailAsync(DeviceCode);
-                Application.Current.Properties[DeviceCode] = swiches;
-            }
-            else
-            {
-                swiches = (Task<List<SettingItemDetail>>)Application.Current.Properties[DeviceCode];
-            }
-           
+            swiches = App.Database.GetItemDetailAsync(DeviceCode);
             PopulateElements(swiches);
         }
 
@@ -63,7 +53,7 @@ namespace SvichEx
             Label ctlLbl;
             Switch ctlSwitch;
 
-            for (int i = 0; i < 8; i++)
+            for (ctr = 1; ctr < 9; ctr++)
             {
                 ctlLbl = stkButtons.FindByName<Label>(lbl + ctr.ToString());
                 ctlSwitch = stkButtons.FindByName<Switch>(tgl + ctr.ToString());
@@ -71,6 +61,7 @@ namespace SvichEx
                 ctlSwitch.IsVisible = false;
             }
 
+            ctr = 1;
 
             foreach (var item in swiches.Result)
             {
@@ -112,7 +103,6 @@ namespace SvichEx
         {
             try
             {
-
 
                 var obj = (Task<List<SettingItem>>)Application.Current.Properties["tabs"];
 
@@ -172,12 +162,24 @@ namespace SvichEx
 
         private void ResetElements()
         {
-            btnTab1.BackgroundColor = Color.LightGray;
-            btnTab2.BackgroundColor = Color.LightGray;
-            btnTab3.BackgroundColor = Color.LightGray;
-            btnTab4.BackgroundColor = Color.LightGray;
-            btnTab5.BackgroundColor = Color.LightGray;
-            btnTab6.BackgroundColor = Color.LightGray;
+            btnTab1.BackgroundColor = Color.SlateGray;
+            btnTab1.TextColor = Color.White;
+
+            btnTab2.BackgroundColor = Color.SlateGray;
+            btnTab2.TextColor = Color.White;
+            
+            btnTab3.BackgroundColor = Color.SlateGray;
+            btnTab3.TextColor = Color.White;
+            
+            btnTab4.BackgroundColor = Color.SlateGray;
+            btnTab4.TextColor = Color.White;
+            
+            btnTab5.BackgroundColor = Color.SlateGray;
+            btnTab5.TextColor = Color.White;
+            
+            btnTab6.BackgroundColor = Color.SlateGray;
+            btnTab6.TextColor = Color.White;
+            
             lblError.Text = "";
         }
 
@@ -189,21 +191,22 @@ namespace SvichEx
                 ctlBtn.BackgroundColor = Color.Green;
                 DeviceCode = ctlBtn.ClassId;
                 PopulateSwitchesByDeviceCode();
-                _ = SetDeviceOnlineStatusAsync();
+                _ = SetDeviceOnlineStatusAsync(ctlBtn);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                lblError.Text = ex.Message;
             }
 
         }
 
-        private async Task SetDeviceOnlineStatusAsync()
+        private async Task SetDeviceOnlineStatusAsync(Button ctlBtn)
         {
-            lblDeviceStatus.Text = "OffLine";
-            lblDeviceStatus.BackgroundColor = Color.Red;
+            var obj = (Task<List<SettingItem>>)Application.Current.Properties["tabs"];
+            var buttonText = obj.Result.Find(f => f.NickName == ctlBtn.Text && f.DeviceCode == DeviceCode);
 
+            ctlBtn.BackgroundColor = Color.Red;
+        
             try
             {
 
@@ -214,8 +217,7 @@ namespace SvichEx
 
                 if (IsDeviceEnabled)
                 {
-                    lblDeviceStatus.Text = "Online";
-                    lblDeviceStatus.BackgroundColor = Color.Green;
+                    ctlBtn.BackgroundColor = Color.Green;
                 }
             }
             catch (Exception ex)

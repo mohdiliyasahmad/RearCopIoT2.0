@@ -10,23 +10,23 @@
     </ContentPage.ToolbarItems>
     <StackLayout BackgroundColor="DarkSlateGray">
         <StackLayout>
-            <ScrollView Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Default">
+            <ScrollView Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Default" MinimumWidthRequest="400">
                 <Grid x:Name="grdControls">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="Auto">
+                        <ColumnDefinition Width="200">
                         </ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button ClassId="" x:Name="btnTab1" FontSize="Default" Text="Tab1" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
@@ -37,22 +37,10 @@
                     <Button ClassId="" x:Name="btnTab6" FontSize="Default" Text="Tab6" Grid.Row="1" Grid.Column="5" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
                 </Grid>
             </ScrollView>
+          
         </StackLayout>
         <StackLayout >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto">
-                    </RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition>
-                    </ColumnDefinition>
-                    <ColumnDefinition>
-                    </ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblDeviceTitle" Grid.Column="0" Grid.Row="1" TextColor="White" Text="Device status" HorizontalOptions="End" FontSize="Subtitle"/>
-                <Label x:Name="lblDeviceStatus" Grid.Column="1" Grid.Row="1" TextColor="White" Text="Online"  HorizontalOptions="Start" VerticalOptions="End" FontSize="Micro"  BackgroundColor="DarkSlateGray"/>
-            </Grid>
+       
 
         </StackLayout>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
@@ -87,14 +75,14 @@
                     <Label x:Name="txtSwitch7" Text="Switch 7" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="6" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
                     <Label x:Name="txtSwitch8" Text="Switch 8" FontSize="Large" TextColor="White" Grid.Column="0" Grid.Row="7" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="10"  ></Label>
 
-                    <Switch ClassId="v1" x:Name="swhSwitch1" IsToggled="False" Grid.Column="1" Grid.Row="0"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v2" x:Name="swhSwitch2" IsToggled="false" Grid.Column="1" Grid.Row="1"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v3" x:Name="swhSwitch3" IsToggled="false" Grid.Column="1" Grid.Row="2"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v4" x:Name="swhSwitch4" IsToggled="false" Grid.Column="1" Grid.Row="3"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v5" x:Name="swhSwitch5" IsToggled="false" Grid.Column="1" Grid.Row="4"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v6" x:Name="swhSwitch6" IsToggled="false" Grid.Column="1" Grid.Row="5"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v7" x:Name="swhSwitch7" IsToggled="false" Grid.Column="1" Grid.Row="6"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
-                    <Switch ClassId="v8" x:Name="swhSwitch8" IsToggled="false" Grid.Column="1" Grid.Row="7"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="LightSeaGreen" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v1" x:Name="swhSwitch1" IsToggled="False" Grid.Column="1" Grid.Row="0"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v2" x:Name="swhSwitch2" IsToggled="false" Grid.Column="1" Grid.Row="1"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v3" x:Name="swhSwitch3" IsToggled="false" Grid.Column="1" Grid.Row="2"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v4" x:Name="swhSwitch4" IsToggled="false" Grid.Column="1" Grid.Row="3"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v5" x:Name="swhSwitch5" IsToggled="false" Grid.Column="1" Grid.Row="4"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v6" x:Name="swhSwitch6" IsToggled="false" Grid.Column="1" Grid.Row="5"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v7" x:Name="swhSwitch7" IsToggled="false" Grid.Column="1" Grid.Row="6"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
+                    <Switch ClassId="v8" x:Name="swhSwitch8" IsToggled="false" Grid.Column="1" Grid.Row="7"  HorizontalOptions="StartAndExpand" Scale="2" Margin="15" OnColor="Green" ThumbColor="DarkOrange" Toggled="swhSwitch_Toggled"/>
 
                 </Grid>
             </ScrollView>

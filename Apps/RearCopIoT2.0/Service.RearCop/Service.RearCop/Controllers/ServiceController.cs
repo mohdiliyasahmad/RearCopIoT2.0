@@ -53,6 +53,8 @@ namespace Service.RearCop.Controllers
                     throw new ApplicationException ("Pin not passed");
                 }
 
+                pinName = pinName.ToUpper();
+
                 value = Request.Query["Value"].ToString();
 
                 if (string.IsNullOrWhiteSpace(value.Trim()))
@@ -95,7 +97,7 @@ namespace Service.RearCop.Controllers
                 AppConfiguration.DatabaseServerUriPostFix,
                 AppHttpClient);
 
-                //result = FBHandler.CookDataBeforeSend(result);
+                result = FBHandler.CookDataBeforeSend(result);
                 return result;
         }
         private async System.Threading.Tasks.Task<string> PutDataAsync

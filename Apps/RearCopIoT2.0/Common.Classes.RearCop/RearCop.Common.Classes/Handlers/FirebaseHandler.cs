@@ -105,7 +105,7 @@ namespace RearCop.Common
                     string serverUriPostFix,
                     HttpClient httpClient)
         {
-            serverURL = serverUri +"/Devices/"+ deviceID +"/Transaction/";
+            serverURL = serverUri +"/Devices/"+ deviceID +"/Transaction";
             var result = this.GetDataAsync(serverURL + serverUriPostFix, null, httpClient);
 
             var serializeOptions = new JsonSerializerOptions
@@ -113,7 +113,7 @@ namespace RearCop.Common
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
 
-            var obj = JsonSerializer.Deserialize<ReturnModel>(result.GetAwaiter().GetResult());//,serializeOptions);
+            var obj = JsonSerializer.Deserialize<ReturnModel>(result.Result);//,serializeOptions);
 
             return obj;
         }

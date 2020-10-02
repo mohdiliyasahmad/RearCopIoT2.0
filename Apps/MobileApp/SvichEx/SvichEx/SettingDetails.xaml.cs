@@ -16,8 +16,10 @@ namespace SvichEx
     {
         public SettingItem DeviceSetting { get; set; }
         Task<List<SettingItemDetail>> swiches;
+        Task<List<SettingItemDetail>> swichesTemp;
+
         SettingItemDetail objSwitch;
-    
+
         public SettingDetails(SettingItem settingItem)
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace SvichEx
         {
             base.OnAppearing();
             swiches = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode);
+            swichesTemp = swiches;
             PopulateElements(swiches);
         }
 
@@ -39,27 +42,40 @@ namespace SvichEx
             int Id = 0;
             Editor txtEntry;
             Switch tglSwitch;
-            SettingItemDetail settingItemDetail;
+            SettingItemDetail settingItemDetail =null;
 
+            swichesTemp.Result.Clear();
 
             for (int i = 1; i < 9; i++)
             {
                 txtEntry = stkButtons.FindByName<Editor>(entry + i.ToString());
                 tglSwitch = stkButtons.FindByName<Switch>(tgl + i.ToString());
                 Id = string.IsNullOrEmpty(txtEntry.AutomationId) ? 0 : int.Parse(txtEntry.AutomationId);
+                settingItemDetail = null;
+                if (Id > 0)
+                {
+                    settingItemDetail = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode,Id);
+                }
 
-                settingItemDetail = swiches.Result.Find(f => f.Id == Id);
                 if (settingItemDetail != null)
                 {
-                    SwitchDetail(settingItemDetail, tglSwitch.IsToggled, txtEntry.Text);
+                    settingItemDetail = SwitchDetail(settingItemDetail, txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString());
                 }
                 else
                 {
-                    swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
+                    settingItemDetail = SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id);
+                          //swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
                 }
+
+                settingItemDetail.Id = App.Database.SaveItemDetailAsync(settingItemDetail);
+                App.Database.DeleteAppControlByDeviceCodeAsync(settingItemDetail);
+               
+                settingItemDetail.AppSwitch.ItemId = settingItemDetail.Id;
+                App.Database.SaveAppControlAsync(settingItemDetail.AppSwitch);
+                settingItemDetail.AppToggle.ItemId = settingItemDetail.Id;
+                App.Database.SaveAppControlAsync(settingItemDetail.AppToggle);
             }
 
-            SaveToDatabase(swiches);
             Navigation.PopAsync();
         }
 
@@ -72,45 +88,35 @@ namespace SvichEx
 
         AppControl pageControl;
 
-        private SettingItemDetail SwitchDetail(string switchName, bool isVisible,string edtName,string tglName,int id)
+        private SettingItemDetail SwitchDetail(string switchName, bool isVisible, string edtName, string tglName, int id)
         {
             objSwitch = new SettingItemDetail();
             objSwitch.Id = id;
             objSwitch.DeviceCode = DeviceSetting.DeviceCode;
             objSwitch.IsVisible = isVisible;
 
-            pageControl = new AppControl { ControlName = edtName, Value = switchName, ItemId =id};
+            pageControl = new AppControl { ControlName = edtName, Value = switchName, ItemId = id, DeviceCode = DeviceSetting.DeviceCode };
             objSwitch.AppSwitch = pageControl;
 
-            pageControl = new AppControl { ControlName = tglName, IsVisible =isVisible,ItemId = id};
+            pageControl = new AppControl { ControlName = tglName, IsVisible = isVisible, ItemId = id, DeviceCode = DeviceSetting.DeviceCode };
             objSwitch.AppToggle = pageControl;
 
             return objSwitch;
         }
 
-        private SettingItemDetail SwitchDetail(SettingItemDetail objSwitch, bool isVisible, string txtEntry)
+
+        private SettingItemDetail SwitchDetail(SettingItemDetail objSwitch ,string switchName, bool isVisible, string edtName, string tglName)
         {
+            objSwitch.DeviceCode = DeviceSetting.DeviceCode;
             objSwitch.IsVisible = isVisible;
-            objSwitch.AppSwitch.IsVisible = isVisible;
-            objSwitch.AppSwitch.Value = txtEntry;
 
-            objSwitch.AppToggle.IsVisible = IsVisible;
+            pageControl = new AppControl { ControlName = edtName, Value = switchName, ItemId = objSwitch.Id, DeviceCode = DeviceSetting.DeviceCode, IsVisible = isVisible };
+            objSwitch.AppSwitch = pageControl;
+
+            pageControl = new AppControl { ControlName = tglName, IsVisible = isVisible, ItemId = objSwitch.Id, DeviceCode = DeviceSetting.DeviceCode };
+            objSwitch.AppToggle = pageControl;
+
             return objSwitch;
-        }
-
-        private void SaveToDatabase(Task<List<SettingItemDetail>> swiches)
-        {
-            //var a= App.Database.DeleteItemDetailByDeviceCodeAsync(DeviceSetting.DeviceCode);
-            //var b =App.Database.DeleteAppControlByDeviceCodeAsync(DeviceSetting.DeviceCode);
-
-            foreach (var item in swiches.Result)
-            {
-                App.Database.SaveAppControlAsync(item.AppSwitch);
-                App.Database.SaveAppControlAsync(item.AppToggle);
-            }
-
-            Application.Current.Properties[DeviceSetting.DeviceCode] = swiches;
-
         }
 
         private void PopulateElements(Task<List<SettingItemDetail>> swiches)
@@ -131,7 +137,7 @@ namespace SvichEx
 
         }
 
-        private void PopulateDetails(SettingItemDetail pitem, Editor txt, Switch swch, string edtName,string tglName)
+        private void PopulateDetails(SettingItemDetail pitem, Editor txt, Switch swch, string edtName, string tglName)
         {
             var obj = App.Database.GetAppControlAsync(pitem);
             foreach (var item in obj)
@@ -139,7 +145,7 @@ namespace SvichEx
                 if (item != null && item.ControlName == edtName)
                 {
                     txt.Text = item.ControlName == edtName ? item.Value : "";
-                    pitem.AppSwitch = App.Database.GetAppControlElementAsync(pitem,edtName);
+                    pitem.AppSwitch = App.Database.GetAppControlElementAsync(pitem, edtName);
                 }
 
                 if (item != null && item.ControlName == tglName)

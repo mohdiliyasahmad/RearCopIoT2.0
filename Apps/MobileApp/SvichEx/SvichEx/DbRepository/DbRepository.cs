@@ -53,18 +53,21 @@ namespace SvichEx.DbRepository
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(SettingItem).Name))
                 {
+                    //await Database.DropTableAsync<SettingItem>();
                     await Database.CreateTablesAsync(CreateFlags.AutoIncPK, typeof(SettingItem)).ConfigureAwait(false);
                     initialized = true;
                 }
 
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(SettingItemDetail).Name))
                 {
+                    //await Database.DropTableAsync<SettingItemDetail>();
                     await Database.CreateTablesAsync(CreateFlags.AutoIncPK, typeof(SettingItemDetail)).ConfigureAwait(false);
                     initialized = true;
                 }
 
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(AppControl).Name))
                 {
+                    //await Database.DropTableAsync<AppControl>();
                     await Database.CreateTablesAsync(CreateFlags.AutoIncPK, typeof(AppControl)).ConfigureAwait(false);
                     initialized = true;
                 }
@@ -139,8 +142,14 @@ namespace SvichEx.DbRepository
 
         public Task<List<SettingItemDetail>> GetItemDetailAsync(string deviceCode)
         {
-            return Database.Table<SettingItemDetail>().Where(i => i.DeviceCode == deviceCode).ToListAsync();
-            //return Database.QueryAsync<SettingItemDetail>("SELECT * FROM [SettingItemDetail] WHERE [DeviceCode] = '" + deviceCode + "'");
+            return Database.QueryAsync<SettingItemDetail>("SELECT * FROM [SettingItemDetail] WHERE [DeviceCode] = '" + deviceCode + "'");
+            //return Database.QueryAsync<SettingItemDetail>("SELECT  [SettingItemDetail].*, [AppControl].* FROM [SettingItemDetail] INNER JOIN [AppControl] ON [AppControl].[ItemId] = [SettingItemDetail].[ID] WHERE [SettingItemDetail].[DeviceCode] ='" + deviceCode + "'");
+            //Where DeviceCode = '" + deviceCode + "'" AppControl
+        }
+
+        public SettingItemDetail GetItemDetailAsync(string deviceCode, int id)
+        {
+            return Database.QueryAsync<SettingItemDetail>("SELECT * FROM [SettingItemDetail] WHERE [DeviceCode] = '" + deviceCode + "' and Id=" + id).Result.FirstOrDefault();
             //return Database.QueryAsync<SettingItemDetail>("SELECT  [SettingItemDetail].*, [AppControl].* FROM [SettingItemDetail] INNER JOIN [AppControl] ON [AppControl].[ItemId] = [SettingItemDetail].[ID] WHERE [SettingItemDetail].[DeviceCode] ='" + deviceCode + "'");
             //Where DeviceCode = '" + deviceCode + "'" AppControl
         }
@@ -184,7 +193,6 @@ namespace SvichEx.DbRepository
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -195,21 +203,21 @@ namespace SvichEx.DbRepository
 
         public int SaveAppControlAsync(AppControl item)
         {
-            if (item.Id != 0)
-            {
-                return Database.UpdateAsync(item).Result;
-            }
-            else
-            {
+            //if (item.Id != 0)
+            //{
+            //    return Database.UpdateAsync(item).Result;
+            //}
+            //else
+            //{
                 return Database.InsertAsync(item).Result;
-            }
+            //}
         }
 
         public List<AppControl> GetAppControlAsync(SettingItemDetail item)
         {
             // SQL queries are also possible
             //return Database.<AppControl>("SELECT * FROM [AppControl] WHERE ItemId="+ item.Id);
-            var o = Database.Table<AppControl>().Where(w => w.ItemId== item.Id).ToListAsync().Result;
+            var o = Database.Table<AppControl>().Where(w => w.ItemId== item.Id && w.DeviceCode == item.DeviceCode).ToListAsync().Result;
             return o;
         }
 
@@ -232,6 +240,19 @@ namespace SvichEx.DbRepository
             try
             {
                 return Database.ExecuteAsync("DELETE FROM [AppControl] Where DeviceCode = '" + deviceCode + "'").Result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int DeleteAppControlByDeviceCodeAsync(SettingItemDetail settingItemDetail)
+        {
+            try
+            {
+                return Database.ExecuteAsync("DELETE FROM [AppControl] Where DeviceCode = '" + settingItemDetail.DeviceCode + "' and ItemId=" + settingItemDetail.Id).Result;
             }
             catch (Exception)
             {

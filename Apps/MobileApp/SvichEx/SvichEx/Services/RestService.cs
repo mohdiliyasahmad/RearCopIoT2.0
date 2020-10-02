@@ -36,7 +36,7 @@ namespace SvichEx.Services
             }
             catch
             {
-                throw;
+                throw new ApplicationException("Unable to connect to server");
             }
 
             return objResponce;
@@ -54,11 +54,26 @@ namespace SvichEx.Services
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Unable to connect to server");
             }
 
         }
 
+        public async Task<bool> GetSwitches(string deviceCode)
+        {
+
+            string apiUrl = App.ApiUrl + deviceCode;
+
+            try
+            {
+                var response = await client.GetAsync(apiUrl);
+                return response.StatusCode == HttpStatusCode.OK;
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Unable to connect to server");
+            }
+
+        }
     }
 }
