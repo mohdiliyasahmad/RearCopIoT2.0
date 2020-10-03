@@ -6,6 +6,7 @@ using ZXing;
 using SvichEx.ViewModel;
 using SvichEx.DbRepository;
 using System.Threading.Tasks;
+using ZXing.Net.Mobile.Forms;
 
 namespace SvichEx
 {
@@ -21,14 +22,21 @@ namespace SvichEx
             InitializeComponent();
             settingItem = new SettingItem();
             itemsToBeSaved = new List<SettingItem>();
-            lblError.Text = "";
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            PopulateData();
+            lblError.Text = "";
 
+            if (App.IsInternetAvailable)
+            {
+                PopulateData();
+            }
+            else
+            {
+                lblError.Text = "No internet dectected";
+            }
         }
 
         public void scanView1_OnScanResult(Result result)
@@ -65,9 +73,17 @@ namespace SvichEx
         {
             Button btn = (Button)(sender);
             Editor lbl = (Editor)btn.BindingContext;
-            ValidateInput(lbl.Text);
-            settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "No Device" : lbl.Text;
-            Navigation.PushAsync(new SettingDetails(settingItem));
+            lblError.Text = "";
+            if (App.IsInternetAvailable)
+            {
+                ValidateInput(lbl.Text);
+                settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "No Device" : lbl.Text;
+                Navigation.PushAsync(new SettingDetails(settingItem));
+            }
+            else
+            {
+                lblError.Text = "No internet dectected";
+            }
         }
 
         private void ValidateInput(string strvalue)
@@ -89,31 +105,37 @@ namespace SvichEx
             string nickName = "txtScanView";
             string isVisible = "tglScanView";
             string lblid = "lblId";
-
-            //App.Database.DeleteItem();
-
-            for (int i = 1; i < 7; i++)
-            {
-                ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
-                ctlnickname = grdControls.FindByName<Editor>(nickName + i.ToString());
-                ctltgl = grdControls.FindByName<Switch>(isVisible + i.ToString());
-                ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
             
-                settingItem = new SettingItem();
+            if (App.IsInternetAvailable)
+            {
 
-                settingItem.DeviceCode = string.IsNullOrEmpty(ctldeviceCode.Text) ? "No Device " + i : ctldeviceCode.Text;
-                settingItem.NickName = string.IsNullOrEmpty(ctlnickname.Text) ? "" : ctlnickname.Text;
-                settingItem.IsVisible = ctltgl.IsToggled;
-                settingItem.Id = int.Parse(string.IsNullOrEmpty(ctllbl.Text) ? "0" : ctllbl.Text);
+                for (int i = 1; i < 7; i++)
+                {
+                    ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
+                    ctlnickname = grdControls.FindByName<Editor>(nickName + i.ToString());
+                    ctltgl = grdControls.FindByName<Switch>(isVisible + i.ToString());
+                    ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
 
-                SaveToDatabase(settingItem);
+                    settingItem = new SettingItem();
 
+                    settingItem.DeviceCode = string.IsNullOrEmpty(ctldeviceCode.Text) ? "No Device " + i : ctldeviceCode.Text;
+                    settingItem.NickName = string.IsNullOrEmpty(ctlnickname.Text) ? "" : ctlnickname.Text;
+                    settingItem.IsVisible = ctltgl.IsToggled;
+                    settingItem.Id = int.Parse(string.IsNullOrEmpty(ctllbl.Text) ? "0" : ctllbl.Text);
+
+                    SaveToDatabase(settingItem);
+
+                }
+                var obj = App.Database.GetItems();
+                Application.Current.Properties["tabs"] = obj;
+
+                Navigation.PushAsync(new MainPage());
             }
-            var obj = App.Database.GetItems();
-            Application.Current.Properties["tabs"] = obj;
+            else
+            {
+                lblError.Text = "No internet dectected";
+            }
 
-            Navigation.PushAsync(new MainPage());
-    
         }
 
         private void btnCancel_Clicked(object sender, EventArgs e)
@@ -143,7 +165,7 @@ namespace SvichEx
             string lblid = "lblId";
 
 
-            int i =1;
+            int i = 1;
 
             foreach (var item in obj.Result)
             {
@@ -153,16 +175,24 @@ namespace SvichEx
                 ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
 
                 if (item != null)
-                { 
+                {
                     ctldeviceCode.Text = item.DeviceCode;
                     ctlnickname.Text = item.NickName;
                     ctltgl.IsToggled = item.IsVisible;
                     ctllbl.Text = item.Id.ToString();
                 }
 
-               i++;
+                i++;
             }
 
+        }
+
+        private void tglScanView_Toggled(object sender, ToggledEventArgs e)
+        {
+            Switch sw = (Switch)(sender);
+            ZXingScannerView scnr = (ZXingScannerView)sw.BindingContext;
+
+            scnr.IsEnabled = sw.IsToggled;
         }
     }
 }

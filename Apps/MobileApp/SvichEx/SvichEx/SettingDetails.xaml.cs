@@ -31,9 +31,17 @@ namespace SvichEx
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            swiches = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode);
-            swichesTemp = swiches;
-            PopulateElements(swiches);
+            lblError.Text = "";
+            if (App.IsInternetAvailable)
+            {
+                swiches = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode);
+                swichesTemp = swiches;
+                PopulateElements(swiches);
+            }
+            else
+            {
+                lblError.Text = "No internet dectected";
+            }
         }
 
         private void btnSave_Clicked(object sender, EventArgs e)
@@ -42,40 +50,48 @@ namespace SvichEx
             int Id = 0;
             Editor txtEntry;
             Switch tglSwitch;
-            SettingItemDetail settingItemDetail =null;
+            SettingItemDetail settingItemDetail = null;
+            lblError.Text = "";
 
             swichesTemp.Result.Clear();
 
-            for (int i = 1; i < 9; i++)
+            if (App.IsInternetAvailable)
             {
-                txtEntry = stkButtons.FindByName<Editor>(entry + i.ToString());
-                tglSwitch = stkButtons.FindByName<Switch>(tgl + i.ToString());
-                Id = string.IsNullOrEmpty(txtEntry.AutomationId) ? 0 : int.Parse(txtEntry.AutomationId);
-                settingItemDetail = null;
-                if (Id > 0)
-                {
-                    settingItemDetail = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode,Id);
-                }
 
-                if (settingItemDetail != null)
+                for (int i = 1; i < 9; i++)
                 {
-                    settingItemDetail = SwitchDetail(settingItemDetail, txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString());
-                }
-                else
-                {
-                    settingItemDetail = SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id);
-                          //swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
-                }
+                    txtEntry = stkButtons.FindByName<Editor>(entry + i.ToString());
+                    tglSwitch = stkButtons.FindByName<Switch>(tgl + i.ToString());
+                    Id = string.IsNullOrEmpty(txtEntry.AutomationId) ? 0 : int.Parse(txtEntry.AutomationId);
+                    settingItemDetail = null;
+                    if (Id > 0)
+                    {
+                        settingItemDetail = App.Database.GetItemDetailAsync(DeviceSetting.DeviceCode, Id);
+                    }
 
-                settingItemDetail.Id = App.Database.SaveItemDetailAsync(settingItemDetail);
-                App.Database.DeleteAppControlByDeviceCodeAsync(settingItemDetail);
-               
-                settingItemDetail.AppSwitch.ItemId = settingItemDetail.Id;
-                App.Database.SaveAppControlAsync(settingItemDetail.AppSwitch);
-                settingItemDetail.AppToggle.ItemId = settingItemDetail.Id;
-                App.Database.SaveAppControlAsync(settingItemDetail.AppToggle);
+                    if (settingItemDetail != null)
+                    {
+                        settingItemDetail = SwitchDetail(settingItemDetail, txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString());
+                    }
+                    else
+                    {
+                        settingItemDetail = SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id);
+                        //swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
+                    }
+
+                    settingItemDetail.Id = App.Database.SaveItemDetailAsync(settingItemDetail);
+                    App.Database.DeleteAppControlByDeviceCodeAsync(settingItemDetail);
+
+                    settingItemDetail.AppSwitch.ItemId = settingItemDetail.Id;
+                    App.Database.SaveAppControlAsync(settingItemDetail.AppSwitch);
+                    settingItemDetail.AppToggle.ItemId = settingItemDetail.Id;
+                    App.Database.SaveAppControlAsync(settingItemDetail.AppToggle);
+                }
             }
-
+            else
+            {
+                lblError.Text = "No internet dectected";
+            }
             Navigation.PopAsync();
         }
 
@@ -105,7 +121,7 @@ namespace SvichEx
         }
 
 
-        private SettingItemDetail SwitchDetail(SettingItemDetail objSwitch ,string switchName, bool isVisible, string edtName, string tglName)
+        private SettingItemDetail SwitchDetail(SettingItemDetail objSwitch, string switchName, bool isVisible, string edtName, string tglName)
         {
             objSwitch.DeviceCode = DeviceSetting.DeviceCode;
             objSwitch.IsVisible = isVisible;

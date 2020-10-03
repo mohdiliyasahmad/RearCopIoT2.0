@@ -82,12 +82,12 @@
                 <Label x:Name="lblId5" Grid.Column="1" Grid.Row="9"  IsVisible="False" ></Label>
                 <Label x:Name="lblId6" Grid.Column="1" Grid.Row="11" IsVisible="False" ></Label>
 
-                <Switch x:Uid="" x:Name="tglScanView1" IsToggled="false" Grid.Column="3" Grid.Row="1" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                <Switch x:Uid="" x:Name="tglScanView2" IsToggled="false" Grid.Column="3" Grid.Row="3" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                <Switch x:Uid="" x:Name="tglScanView3" IsToggled="false" Grid.Column="3" Grid.Row="5" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                <Switch x:Uid="" x:Name="tglScanView4" IsToggled="false" Grid.Column="3" Grid.Row="7" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                <Switch x:Uid="" x:Name="tglScanView5" IsToggled="false" Grid.Column="3" Grid.Row="9" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
-                <Switch x:Uid="" x:Name="tglScanView6" IsToggled="false" Grid.Column="3" Grid.Row="11" Scale="1.5" OnColor="LightSeaGreen" ThumbColor="DarkOrange"/>
+                <Switch BindingContext="{x:Reference Name=scanView1}"  x:Uid="" x:Name="tglScanView1" IsToggled="false" Grid.Column="3" Grid.Row="1" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled"/>
+                <Switch BindingContext="{x:Reference Name=scanView2}"  x:Uid="" x:Name="tglScanView2" IsToggled="false" Grid.Column="3" Grid.Row="3" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled" />
+                <Switch BindingContext="{x:Reference Name=scanView3}"  x:Uid="" x:Name="tglScanView3" IsToggled="false" Grid.Column="3" Grid.Row="5" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled" />
+                <Switch BindingContext="{x:Reference Name=scanView4}"  x:Uid="" x:Name="tglScanView4" IsToggled="false" Grid.Column="3" Grid.Row="7" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled" />
+                <Switch BindingContext="{x:Reference Name=scanView5}"  x:Uid="" x:Name="tglScanView5" IsToggled="false" Grid.Column="3" Grid.Row="9" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled" />
+                <Switch BindingContext="{x:Reference Name=scanView6}"  x:Uid="" x:Name="tglScanView6" IsToggled="false" Grid.Column="3" Grid.Row="11" Scale="1.5" OnColor="Green" ThumbColor="AliceBlue" Toggled="tglScanView_Toggled" />
 
                 <Editor x:Name="txtScanView1" Grid.Column="2" Grid.Row="1" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>
                 <Editor x:Name="txtScanView2" Grid.Column="2" Grid.Row="3" Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" PlaceholderColor="SlateGray"></Editor>

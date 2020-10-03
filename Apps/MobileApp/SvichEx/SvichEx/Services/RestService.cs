@@ -59,15 +59,23 @@ namespace SvichEx.Services
 
         }
 
-        public async Task<bool> GetSwitches(string deviceCode)
+        public async Task<string> GetSwitches(string deviceCode)
         {
-
-            string apiUrl = App.ApiUrl + deviceCode;
+            string apiUrl = App.ApiUrl + deviceCode + "/Get";
 
             try
             {
-                var response = await client.GetAsync(apiUrl);
-                return response.StatusCode == HttpStatusCode.OK;
+                var response = client.GetAsync(apiUrl).Result;
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return response.Content.ReadAsStringAsync().Result;
+                }
+                else
+                {
+                    return null;
+                }
+
+
             }
             catch (Exception)
             {

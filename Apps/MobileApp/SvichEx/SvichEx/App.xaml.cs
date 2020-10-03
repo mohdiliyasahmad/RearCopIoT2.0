@@ -7,12 +7,15 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace SvichEx
 {
     public partial class App : Application
     {
         static AppSettingDatabase database;
+        static RestService appService;
+      
         public const string ApiUrl = "https://rciot.azure-api.net/gateway/";
  
         public static AppSettingDatabase Database
@@ -28,6 +31,38 @@ namespace SvichEx
         }
 
 
+        public static Boolean IsInternetAvailable
+        {
+            get
+            {
+                var current = Connectivity.NetworkAccess;
+
+                if (current != NetworkAccess.Internet)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+     
+
+       
+
+        public static RestService AppService
+        {
+            get
+            {
+                if (appService == null)
+                {
+                    appService = new RestService();
+                }
+                return appService;
+            }
+        }
 
 
         public App()
@@ -41,11 +76,6 @@ namespace SvichEx
         {
             var obj = Database.GetItems();
             Application.Current.Properties["tabs"] = obj;
-
-            //var obj2 = Database.GetItems().Result;
-            //var obj1 = Database.GetAllItems().Result;
-
-
         }
 
         protected override void OnSleep()
