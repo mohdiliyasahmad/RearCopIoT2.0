@@ -34,7 +34,6 @@ namespace RearCop.Common
             ErrorLogger= errorLogger;
             AppConfig = (GatewayConfig)pConfig.Value;
             ClientHttp = HttpClients.CreateClient();
-            ClientHttp.Timeout = TimeSpan.FromMinutes(2); 
             AppConfiguration = pAppConfig.Value;
             FBHandler = pFirebaseHandler;
             AppUtilities =pAppUtilities;
