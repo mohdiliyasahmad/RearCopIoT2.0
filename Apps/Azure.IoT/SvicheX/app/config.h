@@ -20,3 +20,14 @@
 #define CONNECTION_STRING_LEN 1024
 
 #define MESSAGE_MAX_LEN 256
+
+
+String host = "rciot.azure-api.net";
+String aipmkey ="3d6cc6a29c8c43549769a7ba23d6f6ca";
+static int messageCount = 1;
+
+unsigned long startMillis;  //some global variables available anywhere in the program
+unsigned long currentMillis;
+WiFiManager wifiManager;
+String isHardwareConnected;
+String deviceValue;

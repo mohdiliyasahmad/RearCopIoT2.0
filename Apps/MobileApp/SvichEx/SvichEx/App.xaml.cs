@@ -48,10 +48,6 @@ namespace SvichEx
             }
         }
 
-     
-
-       
-
         public static RestService AppService
         {
             get

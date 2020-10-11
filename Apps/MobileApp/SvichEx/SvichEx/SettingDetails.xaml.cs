@@ -14,6 +14,14 @@ namespace SvichEx
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingDetails : ContentPage
     {
+        string entry = "txtSwitch", tgl = "swhSwitch";
+        int Id = 0;
+        Editor txtEntry;
+        Switch tglSwitch;
+        SettingItemDetail settingItemDetail = null;
+        Editor txtEdit;
+      
+
         public SettingItem DeviceSetting { get; set; }
         Task<List<SettingItemDetail>> swiches;
         Task<List<SettingItemDetail>> swichesTemp;
@@ -24,6 +32,7 @@ namespace SvichEx
         {
             InitializeComponent();
             DeviceSetting = settingItem;
+
             txtDeviceCode.Text = "for device \"" + DeviceSetting.DeviceCode + "\"";
             lblError.Text = "";
         }
@@ -46,11 +55,7 @@ namespace SvichEx
 
         private void btnSave_Clicked(object sender, EventArgs e)
         {
-            string entry = "txtSwitch", tgl = "swhSwitch";
-            int Id = 0;
-            Editor txtEntry;
-            Switch tglSwitch;
-            SettingItemDetail settingItemDetail = null;
+           
             lblError.Text = "";
 
             swichesTemp.Result.Clear();
@@ -79,6 +84,7 @@ namespace SvichEx
                         //swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
                     }
 
+                    settingItemDetail.SettingId = DeviceSetting.Id;
                     settingItemDetail.Id = App.Database.SaveItemDetailAsync(settingItemDetail);
                     App.Database.DeleteAppControlByDeviceCodeAsync(settingItemDetail);
 
@@ -111,7 +117,7 @@ namespace SvichEx
             objSwitch.DeviceCode = DeviceSetting.DeviceCode;
             objSwitch.IsVisible = isVisible;
 
-            pageControl = new AppControl { ControlName = edtName, Value = switchName, ItemId = id, DeviceCode = DeviceSetting.DeviceCode };
+            pageControl = new AppControl { ControlName = edtName, Value = switchName, ItemId = id, DeviceCode = DeviceSetting.DeviceCode, IsVisible = isVisible };
             objSwitch.AppSwitch = pageControl;
 
             pageControl = new AppControl { ControlName = tglName, IsVisible = isVisible, ItemId = id, DeviceCode = DeviceSetting.DeviceCode };
@@ -139,9 +145,7 @@ namespace SvichEx
         {
             string entry = "txtSwitch", tgl = "swhSwitch";
             int ctr = 1;
-            Editor txtEdit;
-            Switch tglSwitch;
-
+       
             foreach (var item in swiches.Result)
             {
                 txtEdit = stkButtons.FindByName<Editor>(entry + ctr.ToString());

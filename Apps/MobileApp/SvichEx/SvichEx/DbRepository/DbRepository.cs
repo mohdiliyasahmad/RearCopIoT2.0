@@ -107,6 +107,7 @@ namespace SvichEx.DbRepository
         {
             if (item.Id!=0)
             {
+                //UpdateItemDetailAsync(item.DeviceCode, item.Id);
                 return Database.UpdateAsync(item).Result;
             }
             else
@@ -153,6 +154,14 @@ namespace SvichEx.DbRepository
             //return Database.QueryAsync<SettingItemDetail>("SELECT  [SettingItemDetail].*, [AppControl].* FROM [SettingItemDetail] INNER JOIN [AppControl] ON [AppControl].[ItemId] = [SettingItemDetail].[ID] WHERE [SettingItemDetail].[DeviceCode] ='" + deviceCode + "'");
             //Where DeviceCode = '" + deviceCode + "'" AppControl
         }
+
+
+        public SettingItemDetail UpdateItemDetailAsync(string deviceCode, int itemid)
+        {
+            return Database.QueryAsync<SettingItemDetail>("UPDATE [SettingItemDetail] SET [DeviceCode] = '" + deviceCode + "' Where SettingId=" + itemid).Result.FirstOrDefault();
+        }
+
+
 
         private bool IsExistSettingItemDetail(string deviceCode)
         {

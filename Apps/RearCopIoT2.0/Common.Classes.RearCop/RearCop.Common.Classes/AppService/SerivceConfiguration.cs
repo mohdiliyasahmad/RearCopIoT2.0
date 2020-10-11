@@ -13,7 +13,6 @@ namespace RearCop.Common
             services.AddTransient<Utilitities>();
             services.AddTransient<AzureHandler>();
             services.AddTransient<AdafruitHandler>();
-            services.AddHttpClient();
             services.AddMemoryCache();
             return services;
         }

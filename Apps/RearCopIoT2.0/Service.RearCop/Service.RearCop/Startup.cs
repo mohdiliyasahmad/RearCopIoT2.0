@@ -23,6 +23,7 @@ namespace Service.RearCop
             var appConfig =Configuration.GetSection("AppConfig");
             services.Configure<AppConfig>(appConfig);
             services = SerivceConfiguration.ConfigureAppServices(services);
+            services.AddHttpClient();
             services.AddControllers();
         }
 

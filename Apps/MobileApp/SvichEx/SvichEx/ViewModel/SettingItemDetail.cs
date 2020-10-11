@@ -14,7 +14,8 @@ namespace SvichEx.ViewModel
         public int DeviceID { get; set; }
         public string DeviceCode { get; set; }
         public bool IsVisible { get; set; }
-        
+        public int SettingId { get; set; }
+
         [OneToMany("ItemId", "Id")]
         public AppControl AppSwitch { get; set; }
         

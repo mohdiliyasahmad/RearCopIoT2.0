@@ -28,6 +28,8 @@ namespace Gateway.RearCop
             services.Configure<GatewayConfig>(config);
             services.Configure<AppConfig>(appConf);
             services = SerivceConfiguration.ConfigureAppServices(services);
+            services.AddHttpClient();
+            
             services.AddControllers();
         }
 

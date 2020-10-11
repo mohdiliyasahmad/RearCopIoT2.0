@@ -16,12 +16,20 @@ namespace SvichEx
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        PropertyInfo[] props;
 
         public string DeviceCode { get; set; }
         public bool IsDeviceEnabled { get; set; }
 
         public Task<List<SettingItem>> Tabs { get; set; }
 
+        public Task<List<SettingItemDetail>> Swiches;
+
+        public List<AppControl> AppControls;
+
+        public Task<string> ObjSwitches { get; set; }
+
+        public ReturnModel OnSwitches { get; set; }
 
         public MainPage()
         {
@@ -50,9 +58,8 @@ namespace SvichEx
 
         private void PopulateSwitchesByDeviceCode()
         {
-            Task<List<SettingItemDetail>> swiches;
-            swiches = App.Database.GetItemDetailAsync(DeviceCode);
-            PopulateElements(swiches);
+            Swiches = App.Database.GetItemDetailAsync(DeviceCode);
+            PopulateElements(Swiches);
         }
 
 
@@ -85,9 +92,9 @@ namespace SvichEx
 
         private void PopulateDetails(SettingItemDetail pitem, Label txt, Switch swch, string edtName, string tglName)
         {
-            var obj = App.Database.GetAppControlAsync(pitem);
+            AppControls = App.Database.GetAppControlAsync(pitem);
 
-            foreach (var item in obj)
+            foreach (var item in AppControls)
             {
                 if (item != null && item.ControlName == edtName)
                 {
@@ -145,7 +152,6 @@ namespace SvichEx
         {
             Navigation.PopAsync();
             Navigation.PushAsync(new SettingPage());
-
         }
 
         private void btnTab_Pressed(object sender, EventArgs e)
@@ -215,9 +221,11 @@ namespace SvichEx
 
         private async Task SetToggleButtonOnlineStatus()
         {
-            var objSwitches = App.AppService.GetSwitches(DeviceCode);
-            ReturnModel onSwitch = JsonConvert.DeserializeObject<ReturnModel>(objSwitches.Result);
-
+            if (!string.IsNullOrEmpty(DeviceCode))
+            {
+                ObjSwitches = App.AppService.GetSwitches(DeviceCode);
+                OnSwitches = JsonConvert.DeserializeObject<ReturnModel>(ObjSwitches.Result);
+            }
             Switch ctlSwitch;
 
             string tgl = "swhSwitch";
@@ -225,7 +233,7 @@ namespace SvichEx
             var isTgl = false;
             object o;
 
-            PropertyInfo[] props = onSwitch.GetType().GetProperties();
+            props = OnSwitches.GetType().GetProperties();
 
             for (ctr = 1; ctr < 9; ctr++)
             {
@@ -236,7 +244,7 @@ namespace SvichEx
                 if (ctlSwitch.IsVisible)
                 {
 
-                    o = (string)props.Single(p => p.Name.ToUpper() == ctlSwitch.ClassId.ToUpper()).GetValue(onSwitch);
+                    o = (string)props.Single(p => p.Name.ToUpper() == ctlSwitch.ClassId.ToUpper()).GetValue(OnSwitches);
 
                     if (o != null)
                     {

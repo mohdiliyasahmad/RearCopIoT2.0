@@ -8,8 +8,11 @@
 #define Relay6 13 //D7
 #define Relay7 15 //D8
 
-void setupRelay()
+void initRelays()
 {
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+
   pinMode(Relay1, OUTPUT); 
   pinMode(Relay2, OUTPUT); 
   pinMode(Relay3, OUTPUT); 
@@ -19,16 +22,15 @@ void setupRelay()
   pinMode(Relay7, OUTPUT); 
   pinMode(02, OUTPUT);
  
-  digitalWrite(Relay1, HIGH);
-  digitalWrite(Relay2, HIGH);
-  digitalWrite(Relay3, HIGH);
-  digitalWrite(Relay4, HIGH);
-  digitalWrite(Relay5, HIGH);
-  digitalWrite(Relay6, HIGH);
-  digitalWrite(Relay7, HIGH);
-  digitalWrite(02, HIGH);
+  digitalWrite(Relay1, LOW);
+  digitalWrite(Relay2, LOW);
+  digitalWrite(Relay3, LOW);
+  digitalWrite(Relay4, LOW);
+  digitalWrite(Relay5, LOW);
+  digitalWrite(Relay6, LOW);
+  digitalWrite(Relay7, LOW);
+  digitalWrite(02, LOW);
 }
-
 
 void ControlRelay(char *payload)
 {
@@ -37,67 +39,66 @@ void ControlRelay(char *payload)
 
   Serial.println(String(payload));
   
-  String tem= root["v1"];
- 
-    if(root["v1"]=="0")
+    if(root["v1"]=="1")
     {
        digitalWrite(Relay1, HIGH);
     }
-    else
+    
+    if(root["v1"]=="0")
     {
        digitalWrite(Relay1, LOW);
     }
 
-    if(root["v2"]=="0")
+    if(root["v2"]=="1")
     {
        digitalWrite(Relay2, HIGH);
     }
-    else
+    if(root["v2"]=="0")
     {
        digitalWrite(Relay2, LOW);
     }
 
-    if(root["v3"]=="0")
+    if(root["v3"]=="1")
     {
        digitalWrite(Relay3, HIGH);
     }
-    else
+    if(root["v3"]=="0")
     {
        digitalWrite(Relay3, LOW);
     }
 
-    if(root["v4"]=="0")
+    if(root["v4"]=="1")
     {
        digitalWrite(Relay4, HIGH);
     }
-    else
+    if(root["v4"]=="0")
     {
        digitalWrite(Relay4, LOW);
     }
     
-    if(root["v5"]=="0")
+    if(root["v5"]=="1")
     {
        digitalWrite(Relay5, HIGH);
     }
-    else
+     if(root["v5"]=="0")
     {
        digitalWrite(Relay5, LOW);
     }
 
-    if(root["v6"]=="0")
+    if(root["v6"]=="1")
     {
        digitalWrite(Relay6, HIGH);
     }
-    else
+    if(root["v6"]=="0")
     {
        digitalWrite(Relay6, LOW);
     }
 
-    if(root["v7"]=="0")
+    if(root["v7"]=="1")
     {
        digitalWrite(Relay7, HIGH);
     }
-    else
+    if(root["v7"]=="0")
     {
        digitalWrite(Relay7, LOW);
     }
