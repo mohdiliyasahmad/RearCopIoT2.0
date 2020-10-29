@@ -13,20 +13,27 @@ namespace SvichEx.Services
     public class RestService
     {
         HttpClient client;
+        HttpClientHandler httpClientHandler;
 
         public RestService()
         {
-            client = new HttpClient();
+            httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =  (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            //client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "3d6cc6a29c8c43549769a7ba23d6f6ca");
         }
 
         public async Task<bool> GetDeviceStatusAsync(string deviceCode)
         {
             string url = App.ApiUrl + deviceCode + "/IsHardwareConnected";
+           
             bool objResponce = false;
             try
             {
-                var response = await client.GetAsync(url);
+
+                var response = await client.GetAsync(url).ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -34,9 +41,9 @@ namespace SvichEx.Services
                     objResponce = bool.Parse(responseStream);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw new ApplicationException("Unable to connect to server");
+                throw new ApplicationException("Unable to connect to server:-" + ex.Message);
             }
 
             return objResponce;

@@ -58,6 +58,8 @@ namespace SvichEx
            
             lblError.Text = "";
 
+            ((Button)sender).IsEnabled = false;
+
             swichesTemp.Result.Clear();
 
             if (App.IsInternetAvailable)
@@ -98,6 +100,8 @@ namespace SvichEx
             {
                 lblError.Text = "No internet dectected";
             }
+
+            ((Button)sender).IsEnabled = true;
             Navigation.PopAsync();
         }
 

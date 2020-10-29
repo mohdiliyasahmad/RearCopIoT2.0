@@ -59,6 +59,33 @@
             }
         },
         {
+            "name": "AdaD2CFeed",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Adafruit.D2C.Feed/Adafruit.D2C.Feed/bin/Debug/netcoreapp3.1/Adafruit.D2C.Feed.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Adafruit.D2C/Adafruit.D2C.Feed",
+            "stopAtEntry": false,
+            "requireExactSource":false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
+            },
+            "launchBrowser" : {
+                "enabled": false
+             },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:7080/"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": "Adafruit.DeviceStatus",
             "type": "coreclr",
             "request": "launch",
@@ -229,6 +256,33 @@
             }
         },
         {
+            "name": "AdaD2C.Feed.Run",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Adafruit.D2C.Feed/Adafruit.D2C.Feed/bin/Debug/netcoreapp3.1/Adafruit.D2C.Feed.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Adafruit.D2C/Adafruit.D2C.Feed",
+            "stopAtEntry": false,
+            "requireExactSource":false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
+            },
+            "launchBrowser" : {
+                "enabled": false
+             },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:7080/"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": "Adafruit.DeviceStatus.Run",
             "type": "coreclr",
             "request": "launch",
@@ -339,8 +393,7 @@
                 "/Views": "${workspaceFolder}/Views"
             }
         }
-       
-             
+        
          
          
         
@@ -349,11 +402,11 @@
      "compounds": [
         {
             "name": "Debug All",
-            "configurations": ["AdaC2D","AdaD2C","Adafruit.DeviceStatus","Gateway","Adafruit.Register","Service"]
+            "configurations": ["AdaC2D","AdaD2C","AdaD2CFeed","Adafruit.DeviceStatus","Gateway","Adafruit.Register","Service"]
         },
         {
             "name": "Run All",
-            "configurations": ["AdaC2D.Run","AdaD2C.Run","Adafruit.DeviceStatus.Run","Gateway.Run","Adafruit.Register.Run","Service.Run"]
+            "configurations": ["AdaC2D.Run","AdaD2C.Run","AdaD2C.Feed.Run","Adafruit.DeviceStatus.Run","Gateway.Run","Adafruit.Register.Run","Service.Run"]
         }
 
     ]

@@ -67,7 +67,7 @@ namespace SvichEx.DbRepository
 
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(AppControl).Name))
                 {
-                    //await Database.DropTableAsync<AppControl>();
+                    //awit Database.DropTableAsync<AppControl>();
                     await Database.CreateTablesAsync(CreateFlags.AutoIncPK, typeof(AppControl)).ConfigureAwait(false);
                     initialized = true;
                 }

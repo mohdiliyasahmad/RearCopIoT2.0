@@ -101,7 +101,8 @@ namespace RearCop.Common
             , string mqttURL
             , string mqttUserName
             , string mqttKey
-            ,string feedName)
+            ,string feedName
+            , AdaFruitRequest queryParam)
         {
 
             List<AdaFruitModel> objResponse = new List<AdaFruitModel>();
@@ -113,7 +114,7 @@ namespace RearCop.Common
             try
             {
 
-                var response = appHttpClient.GetAsync("https://" + mqttURL + "/" + mqttUserName+ "/groups/" + deviceId + "/feeds/"+ feedName+"/data").Result;
+                var response = appHttpClient.GetAsync(mqttURL + "/" + mqttUserName+ "/groups/" + deviceId + "/feeds/"+ feedName+"/data").Result;
 
                 if (response.IsSuccessStatusCode)
                 {

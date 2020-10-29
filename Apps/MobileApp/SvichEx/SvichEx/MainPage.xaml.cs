@@ -33,12 +33,14 @@ namespace SvichEx
 
         public MainPage()
         {
+            OnSwitches = new ReturnModel();
             InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            lblError.Text = "";
             try
             {
                 if (App.IsInternetAvailable)
@@ -148,7 +150,7 @@ namespace SvichEx
             }
         }
 
-        private void Button_Pressed(object sender, EventArgs e)
+        private void Setting_Pressed(object sender, EventArgs e)
         {
             Navigation.PopAsync();
             Navigation.PushAsync(new SettingPage());
@@ -198,6 +200,8 @@ namespace SvichEx
             btnTab6.TextColor = Color.White;
 
             lblError.Text = "";
+            lblStatus.Text = "";
+            lblStatus.IsVisible = false;
         }
 
         private void SetTab(Button ctlBtn)
@@ -205,11 +209,17 @@ namespace SvichEx
             try
             {
                 ResetElements();
-                ctlBtn.BackgroundColor = Color.Green;
+                ctlBtn.BackgroundColor = Color.Red;
+
+                if (Tabs.Result.Count > 0)
+                {
+                    lblStatus.IsVisible = true;
+                    lblStatus.Text = "Checking device oneline status, please wait...";
+                }
                 DeviceCode = ctlBtn.ClassId;
                 _ = SetDeviceOnlineStatusAsync(ctlBtn);
                 PopulateSwitchesByDeviceCode();
-                _ = SetToggleButtonOnlineStatus();
+                SetToggleButtonOnlineStatus();
 
             }
             catch (Exception ex)
@@ -219,40 +229,45 @@ namespace SvichEx
 
         }
 
-        private async Task SetToggleButtonOnlineStatus()
+        private void SetToggleButtonOnlineStatus()
         {
             if (!string.IsNullOrEmpty(DeviceCode))
             {
                 ObjSwitches = App.AppService.GetSwitches(DeviceCode);
-                OnSwitches = JsonConvert.DeserializeObject<ReturnModel>(ObjSwitches.Result);
-            }
-            Switch ctlSwitch;
+                
+                if (ObjSwitches.Result != null)
+                {
+                    OnSwitches = JsonConvert.DeserializeObject<ReturnModel>(ObjSwitches.Result);
+                }
 
-            string tgl = "swhSwitch";
-            int ctr = 1;
-            var isTgl = false;
-            object o;
+                Switch ctlSwitch;
 
-            props = OnSwitches.GetType().GetProperties();
+                string tgl = "swhSwitch";
+                int ctr = 1;
+                var isTgl = false;
+                object o;
 
-            for (ctr = 1; ctr < 9; ctr++)
-            {
+                props = OnSwitches.GetType().GetProperties();
 
-                ctlSwitch = grdControls.FindByName<Switch>(tgl + ctr.ToString());
-                isTgl = false;
-
-                if (ctlSwitch.IsVisible)
+                for (ctr = 1; ctr < 9; ctr++)
                 {
 
-                    o = (string)props.Single(p => p.Name.ToUpper() == ctlSwitch.ClassId.ToUpper()).GetValue(OnSwitches);
+                    ctlSwitch = grdControls.FindByName<Switch>(tgl + ctr.ToString());
+                    isTgl = false;
 
-                    if (o != null)
+                    if (ctlSwitch.IsVisible)
                     {
-                        if (Convert.ToInt32(o.ToString()) == 1)
+
+                        o = (string)props.Single(p => p.Name.ToUpper() == ctlSwitch.ClassId.ToUpper()).GetValue(OnSwitches);
+
+                        if (o != null)
                         {
-                            isTgl = true;
+                            if (Convert.ToInt32(o.ToString()) == 1)
+                            {
+                                isTgl = true;
+                            }
+                            ctlSwitch.IsToggled = isTgl;
                         }
-                        ctlSwitch.IsToggled = isTgl;
                     }
                 }
             }
@@ -277,6 +292,8 @@ namespace SvichEx
                 if (IsDeviceEnabled)
                 {
                     ctlBtn.BackgroundColor = Color.Green;
+                    lblStatus.Text = "";
+                    lblStatus.IsVisible = false;
                 }
             }
             catch (Exception ex)
@@ -291,13 +308,14 @@ namespace SvichEx
             var tgl = (Switch)sender;
             var pin = tgl.ClassId;
             var value = tgl.IsToggled ? 1 : 0;
+            Task<bool> returnValue;
             lblError.Text = "";
 
             try
             {
                 if (App.IsInternetAvailable)
-                { 
-                _ = App.AppService.SwitchOnOff(pin, value, DeviceCode);
+                {
+                    returnValue = App.AppService.SwitchOnOff(pin, value, DeviceCode);
                 }
                 else
                 {
@@ -307,6 +325,7 @@ namespace SvichEx
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
+                tgl.IsEnabled = true;
             }
         }
 

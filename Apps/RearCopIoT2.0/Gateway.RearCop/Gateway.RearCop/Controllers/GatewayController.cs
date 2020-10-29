@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Net;
 using System.Dynamic;
+using System.Collections.Generic;
 
 namespace Gateway.RearCop.Controllers
 {
@@ -16,13 +17,23 @@ namespace Gateway.RearCop.Controllers
     [Route("/")]
     public class GatewayController : GatewayControllerBase
     {
+        public static HttpClient HttpRegisterDevice { get; set; }
+        public static HttpClient HttpDeviceStatus { get; set; }
+        public static HttpClient HttpC2D { get; set; }
+        public static HttpClient HttpD2C { get; set; }
+        public static HttpClient HttpService { get; set; }
+        public IHttpClientFactory GatewayProvider { get; set; }
+
         public GatewayController(IHttpClientFactory pclientFactory,
         ILogger<GatewayControllerBase> errorLogger,
         IOptions<GatewayConfig> pConfig,
         IOptions<AppConfig> pAppConfig,
         FirebaseHandler pFirebaseHandler,
         Utilitities pAppUtilities) 
-        : base (pclientFactory, errorLogger, pConfig, pAppConfig, pFirebaseHandler,pAppUtilities) { }
+        : base (pclientFactory, errorLogger, pConfig, pAppConfig, pFirebaseHandler,pAppUtilities) { 
+
+           
+        }
 
         [Route("RegisterDevice")]
         public void RegisterDevice()
@@ -55,28 +66,28 @@ namespace Gateway.RearCop.Controllers
 
         [Route("Get/{pinName}")]
         [HttpGet("{pinName}")]
-        public async System.Threading.Tasks.Task<string> ServiceAsync(string pinName)
+        public string Service(string pinName)
         {
             var value = string.Empty;
             try
             {
-                if(string.IsNullOrEmpty(pinName.Trim()))
+                if (string.IsNullOrEmpty(pinName.Trim()))
                 {
                     Response.StatusCode = StatusCodes.Status428PreconditionRequired;
-                    throw new ApplicationException ("Pin not passed");
+                    throw new ApplicationException("Pin not passed");
                 }
-  
+
                 var objReturnModel = CallServiceAsync("GET", pinName, value).Result;
                 value = (string)objReturnModel.GetType().GetProperty(pinName).GetValue(objReturnModel, null);
                 return value;
-            
+
             }
             catch (System.Exception ex)
             {
                 Response.StatusCode = StatusCodes.Status428PreconditionRequired;
                 throw new ApplicationException(ex.Message);
             }
-          
+
         }
 
         [Route("Get/{pinName}/{value}")]
@@ -120,6 +131,21 @@ namespace Gateway.RearCop.Controllers
             {
                 Response.StatusCode = StatusCodes.Status428PreconditionRequired;
                 throw new ApplicationException(ex.Message);
+            }
+           
+        }
+
+         [Route("ReadFromDeice")]
+        public List<AdaFruitModel> ReadFromDeice(AdaFruitRequest request)
+        {
+            try
+            {
+                return D2ClDeviceServiceAsync("SendC2D",request);
+            }
+            catch (System.Exception ex)
+            {
+                Response.StatusCode = StatusCodes.Status428PreconditionRequired;
+                throw new ApplicationException("Read dvice gateway failed");
             }
            
         }
@@ -241,6 +267,36 @@ namespace Gateway.RearCop.Controllers
             return objResponce;
         }
 
+
+        private List<AdaFruitModel> D2ClDeviceServiceAsync(
+            string method, 
+            AdaFruitRequest requestParam)
+        {
+            GetHttpClient();
+            List<AdaFruitModel> objResponce = new List<AdaFruitModel>();
+
+            var response = ClientHttp.GetAsync(AppConfig.DeviceEndpoint).Result; 
+          
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var responseStream = response.Content.ReadAsStreamAsync().Result;
+                    objResponce = JsonSerializer.DeserializeAsync<List<AdaFruitModel>>(responseStream).Result;
+                }
+                catch 
+                {
+                    Response.StatusCode = StatusCodes.Status428PreconditionRequired;
+                    return objResponce;
+                }
+            }
+            else
+            {
+                    Response.StatusCode = StatusCodes.Status428PreconditionRequired;
+            }
+            return objResponce;
+        }
+
         private bool CallDeviceServiceIsHardwareConnected(string method)
         {
             GetHttpClient();
@@ -277,6 +333,7 @@ namespace Gateway.RearCop.Controllers
 
         private HttpClient GetHttpClient()
         {
+            
             ClientHttp.DefaultRequestHeaders.Remove(AppConfig.DeviceKey);
             ClientHttp.DefaultRequestHeaders.Remove(AppConfig.ServiceKey);
             

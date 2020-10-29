@@ -1,4 +1,10 @@
 
+WiFiManager wifiManager;
+
+DHT dht(DHTPIN, DHTTYPE); // 11 works fine for ESP8266
+float humidity, temp_f;  // Values read from sensor 
+unsigned long previousMillis = 0;        // will store last temp was read
+
 /************************* Adafruit.io Setup *********************************/
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883                   // use 8883 for SSL
@@ -43,9 +49,8 @@ int dBmtoPercentage(int dBm)
 
 void initWifi()
 {
- 
-  wifiManager.autoConnect(string2char("SvichEx.4C"));
-  //wifiManager.resetSettings();
+  startMillis = millis();  //initial start time
+  wifiManager.autoConnect(string2char("RCSense" + ESP.getChipId()));
  
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
@@ -56,17 +61,12 @@ void initWifi()
   {
       wifiManager.resetSettings();
   }
-  else
-  {
 
-    Serial.println("Device:" + deviceId +"- connected with wifi:" + WiFi.SSID());
-    Serial.println("IP address: "); 
-    Serial.println(WiFi.localIP());
-    Serial.print("WIFI Signal strength :");
-    Serial.println(dBmtoPercentage(WiFi.RSSI()));
-  }
- 
- 
+  Serial.println("Device:" + deviceId +"- connected with wifi:" + WiFi.SSID());
+  Serial.println("IP address: "); 
+  Serial.println(WiFi.localIP());
+  Serial.print("WIFI Signal strength :");
+  Serial.println(dBmtoPercentage(WiFi.RSSI()));
   
 }
 
@@ -151,6 +151,7 @@ void DeviceReset()
 
 
 
+
 String detectHardware(char *payload)
 {
   StaticJsonDocument<MESSAGE_MAX_LEN> root;
@@ -159,26 +160,42 @@ String detectHardware(char *payload)
   return temp;
 }
 
-
-
-
-
-
-
-
-/*
- 
-    pinMode(LED_BUILTIN, OUTPUT);
+void blinkLED()
+{
+    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED1, LOW);
+    delay(100);
     digitalWrite(LED_BUILTIN, HIGH);
-    Serial.begin(115200);
-    //setupRelay();
-    initWifi();
-    Serial.println(string2char(String(USERNAME) +  deviceId + String(C2D)));
+    digitalWrite(LED1, HIGH);
+}
+
+void gettemperature() {
+  
+    // Reading temperature for humidity takes about 250 milliseconds!
+    // Sensor readings may also be up to 2 seconds 'old' (it's a very slow sensor)
+    humidity = dht.readHumidity();      // Read humidity (percent)
+    temp_f = dht.readTemperature();     // Read temperature as Fahrenheit
     
-    //c2d.setCallback(c2dcallback);
-    // Setup MQTT subscription for time feed.
-    registerDevice();
-    getDeviceDefaults();
-    mqtt.subscribe(&c2d);
- 
- */
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(humidity) || isnan(temp_f)) {
+      Serial.println("Failed to read from DHT sensor!");
+      digitalWrite(LED2, LOW);
+      digitalWrite(LED1, LOW);
+      return;
+    }
+
+    blinkLED();
+
+
+   if(temp_f<=40)
+    {
+        digitalWrite(LED1, HIGH);
+        digitalWrite(LED2, LOW);
+    }
+
+   if(temp_f>40)
+    {
+        digitalWrite(LED2, HIGH);
+        digitalWrite(LED1, LOW);
+    }
+}

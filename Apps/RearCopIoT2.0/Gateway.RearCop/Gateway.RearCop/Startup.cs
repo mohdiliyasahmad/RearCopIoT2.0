@@ -24,7 +24,6 @@ namespace Gateway.RearCop
 
             var config =Configuration.GetSection("GatewayConfig");
             var appConf =Configuration.GetSection("AppConfig");
-            services.AddMemoryCache();
             services.Configure<GatewayConfig>(config);
             services.Configure<AppConfig>(appConf);
             services = SerivceConfiguration.ConfigureAppServices(services);

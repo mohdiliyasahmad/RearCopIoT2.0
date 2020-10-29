@@ -32,25 +32,30 @@ namespace Device.RearCop.Controllers
         // GET api/values/isHardwareConnected
         [HttpGet]
         [Route("ReadFromDevice")]
-        public List<AdaFruitModel> ReadFromDevice()
+        public List<AdaFruitModel> ReadFromDevice(AdaFruitRequest requestParam = null)
         {
             var devicePayload = new List<AdaFruitModel>();
             try
             {
-                devicePayload = ReadFromDevice(DeviceID);
+                devicePayload = ReadFromDevice(DeviceID, requestParam);
                 return devicePayload;
             }
             catch (Exception ex)
             {
                 Response.StatusCode = StatusCodes.Status413PayloadTooLarge;
                 ErrorLogger.LogError(ex, ex.Message);
-                throw new ApplicationException(ex.Message);
+                throw new ApplicationException("Unable to read from device");
             }
         }
 
-        private List<AdaFruitModel> ReadFromDevice(string deviceId)
+        private List<AdaFruitModel> ReadFromDevice(string deviceId, AdaFruitRequest requestParam)
         {
-            return AdfHandler.ReadFeedData(deviceId, AppConfiguration.MqttURL, AppConfiguration.MqttUserName, AppConfiguration.MqttKey,"d2c");
+            return AdfHandler.ReadFeedData(deviceId,  
+             AppConfiguration.MqttURL, 
+             AppConfiguration.MqttUserName,
+             AppConfiguration.MqttKey,
+             "d2c",
+             requestParam);
         }
     }
 }

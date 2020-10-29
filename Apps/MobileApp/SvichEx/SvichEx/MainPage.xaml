@@ -6,42 +6,43 @@
              mc:Ignorable="d"
              x:Class="SvichEx.MainPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="txtToolbar" Text="Setting" Order="Default" Priority="0" Clicked="Button_Pressed"/>
+        <ToolbarItem x:Name="txtToolbar" Text="Setting" Order="Default" Priority="0" Clicked="Setting_Pressed"/>
     </ContentPage.ToolbarItems>
+    
     <StackLayout BackgroundColor="DarkSlateGray">
         <StackLayout>
+            <Label  Text="Room(s)" TextColor="White" HorizontalOptions="Center"></Label>
             <ScrollView Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Default" MinimumWidthRequest="400">
                 <Grid x:Name="grdControls">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
-                        <ColumnDefinition Width="200">
+                        <ColumnDefinition Width="100">
                         </ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button ClassId="" x:Name="btnTab1" FontSize="Default" Text="Tab1" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
-                    <Button ClassId="" x:Name="btnTab2" FontSize="Default" Text="Tab2" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
-                    <Button ClassId="" x:Name="btnTab3" FontSize="Default" Text="Tab3" Grid.Row="1" Grid.Column="2" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
-                    <Button ClassId="" x:Name="btnTab4" FontSize="Default" Text="Tab4" Grid.Row="1" Grid.Column="3" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
-                    <Button ClassId="" x:Name="btnTab5" FontSize="Default" Text="Tab5" Grid.Row="1" Grid.Column="4" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
-                    <Button ClassId="" x:Name="btnTab6" FontSize="Default" Text="Tab6" Grid.Row="1" Grid.Column="5" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab1" FontSize="Default" Text="Room 1" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab2" FontSize="Default" Text="Room 2" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab3" FontSize="Default" Text="Room 3" Grid.Row="1" Grid.Column="2" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab4" FontSize="Default" Text="Room 4" Grid.Row="1" Grid.Column="3" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab5" FontSize="Default" Text="Room 5" Grid.Row="1" Grid.Column="4" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
+                    <Button ClassId="" x:Name="btnTab6" FontSize="Default" Text="Room 6" Grid.Row="1" Grid.Column="5" HorizontalOptions="StartAndExpand" Clicked="btnTab_Pressed"></Button>
                 </Grid>
             </ScrollView>
-          
+            <Label x:Name="lblStatus" Text="status" TextColor="Wheat" HorizontalOptions="Center"></Label>
         </StackLayout>
         <StackLayout >
-       
-
+            <Label Text="Switche(s) of selected room" TextColor="White" HorizontalOptions="Center"></Label>
         </StackLayout>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <ScrollView FlowDirection="LeftToRight">
@@ -232,6 +233,7 @@
                 </Grid>
             </ScrollView>
         </StackLayout>
+        
         <Label x:Name="lblError" Text="error" TextColor="Red" HorizontalOptions="StartAndExpand"></Label>
         <Label x:Name="lblVersion" Text="Version : 1.0" TextColor="Green" HorizontalOptions="EndAndExpand"></Label>
     </StackLayout>

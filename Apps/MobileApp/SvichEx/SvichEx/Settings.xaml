@@ -13,13 +13,15 @@
     </ContentPage.BindingContext>
 
     <StackLayout BackgroundColor="DarkSlateGray">
-        <Label Text="Device Setting" 
+        <Label Text="Home Setting" 
                HorizontalOptions="CenterAndExpand" 
-               VerticalOptions="CenterAndExpand" FontSize="Title" TextColor="White" />
+               VerticalOptions="CenterAndExpand" FontSize="Title"  TextColor="White" />
 
         <ScrollView FlowDirection="LeftToRight" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <StackLayout x:Name="grdControls">
+              
                 <StackLayout x:Name="secRoom1">
+                    <Label Text="Room 1" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -38,7 +40,7 @@
 
                         <Label x:Name="lblId1" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
-                                                
+                                          
                         <Editor x:Name="txtDeviceCode1" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
@@ -52,12 +54,15 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode1}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                                FontSize="Micro"  Text="Switches..." 
+                                TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
 
                 <StackLayout x:Name="secRoom2"  IsVisible="false">
+                    <Label Text="Room 2" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -90,11 +95,13 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode2}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                          FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
                 <StackLayout x:Name="secRoom3"  IsVisible="false">
+                    <Label Text="Room 3" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -127,11 +134,13 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode3}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                          FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
                 <StackLayout x:Name="secRoom4"  IsVisible="false">
+                    <Label Text="Room 4" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -164,11 +173,13 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode4}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                          FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
                 <StackLayout x:Name="secRoom5"  IsVisible="false">
+                    <Label Text="Room 5" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -201,10 +212,12 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode5}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                          FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
                 <StackLayout x:Name="secRoom6"  IsVisible="false">
+                    <Label Text="Room 6" TextColor="GreenYellow"></Label>
                     <Grid FlowDirection="LeftToRight" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -237,10 +250,11 @@
 
                         <Button BindingContext="{x:Reference Name=txtDeviceCode6}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
-                        Text="..." TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
+                          FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
                        
                     </Grid>
+                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                 </StackLayout>
 
             </StackLayout>
@@ -257,36 +271,34 @@
                     </ColumnDefinition>
                     <ColumnDefinition Width="Auto">
                     </ColumnDefinition>
-                    <ColumnDefinition Width="Auto">
-                        
-                    </ColumnDefinition>
+            
                 </Grid.ColumnDefinitions>
 
-                <zxing:ZXingScannerView Grid.Row="0" Grid.Column="0" x:Name="scanView1" 
+                <zxing:ZXingScannerView Grid.Row="0" Grid.Column="0" x:Name="scanView1"  IsVisible="false"
                                         Grid.RowSpan="2" WidthRequest="200" HeightRequest="200" 
                                         OnScanResult="scanView1_OnScanResult"
                                         IsEnabled="False" 
                                         IsAnalyzing="False"
                                         IsScanning="True" 
-                                        HorizontalOptions="CenterAndExpand"
-                                        
                                         />
-                <Button BindingContext="{x:Reference Name=scanView1}" x:Name="btnScanView1"  Grid.RowSpan="2"
-                        Grid.Column="1" Grid.Row="0" Text="Scan" Clicked="btnScanView_Clicked" HorizontalOptions="End"></Button>
+                <Button BindingContext="{x:Reference Name=scanView1}" x:Name="btnScanView1"  Grid.RowSpan="2" WidthRequest="200" HeightRequest="200"
+                        Grid.Column="0" Grid.Row="0" Text="Scan" Clicked="btnScanView_Clicked"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Button>
+                
 
-                <StackLayout HorizontalOptions="End" Grid.Column="3">
+                <StackLayout HorizontalOptions="Center" Grid.Column="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Text="Add New Room" HorizontalOptions="End" Clicked="Button_Clicked">
+                        <Button Grid.Row="0" Grid.Column="0" Text="Add New Room" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked">
 
                         </Button>
-                        <Button  x:Name="btnDelete6"  Grid.Row="1" HorizontalOptions="End"
+                        <Button  x:Name="btnDelete"  Grid.Row="1" HorizontalOptions="FillAndExpand"
                                  Text="Delete Last Room" TextColor="White" BackgroundColor="Red"
                                  Clicked="btnDelete_Clicked" BindingContext="{x:Reference Name=secRoom6}"  Grid.Column="0"></Button>
 

@@ -3,6 +3,8 @@ namespace RearCop.Common
 {
     public class GatewayConfig
     {
+        public string DeviceD2CEndpoint { get; set; }
+        public string DeviceFeedEndpoint { get; set; }
         public string RegisterDeviceEndpoint { get; set; }
         public string FetchDeviceEndpoint { get; set; }
         public string ServiceDeviceEndpoint { get; set; }

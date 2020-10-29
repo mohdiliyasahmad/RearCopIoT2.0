@@ -21,8 +21,7 @@ namespace SvichEx
         public Task<List<SettingItem>> Tabs { get; set; }
 
         SettingItem settingItem;
-        List<SettingItem> itemsToBeSaved;
-
+      
         Editor ctlnickname;
         Editor ctldeviceCode;
         Label ctllbl;
@@ -39,21 +38,23 @@ namespace SvichEx
         {
             InitializeComponent();
             settingItem = new SettingItem();
-            itemsToBeSaved = new List<SettingItem>();
-
-            var options = new MobileBarcodeScanningOptions
-            {
-                AutoRotate = true
-            };
-
-            scanView1.Options = options;
-           
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             lblError.Text = "";
+
+            var options = new MobileBarcodeScanningOptions
+            {
+                AutoRotate = true,
+                UseNativeScanning = true,
+                TryHarder = true,
+                TryInverted = true,
+                UseFrontCameraIfAvailable = true
+            };
+
+            scanView1.Options = options;
 
             if (App.IsInternetAvailable)
             {
@@ -77,6 +78,10 @@ namespace SvichEx
                     if (ctlScn.IsVisible)
                     {
                         ctldeviceCode.Text = result.Text;
+                        btnScanView1.IsVisible = true;
+                        scanView1.IsScanning = false;
+                        scanView1.IsAnalyzing = false;
+                        scanView1.IsVisible = false;
                         break;
                     }
                 }
@@ -89,22 +94,26 @@ namespace SvichEx
             Button btn = (Button)(sender);
             Editor lbl = (Editor)btn.BindingContext;
             lblError.Text = "";
+            btn.IsEnabled = false;
             if (App.IsInternetAvailable)
             {
                 if (!ValidateInput(lbl.Text))
                 {
+                    btn.IsEnabled = true;
                     return;
                 }
                 
                 SaveSettings();
                
                 settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "No Device" : lbl.Text;
+                Navigation.PopAsync();
                 Navigation.PushAsync(new SettingDetails(settingItem));
             }
             else
             {
                 lblError.Text = "No internet dectected";
             }
+            btn.IsEnabled = true;
         }
 
         private bool ValidateInput(string strvalue)
@@ -123,7 +132,10 @@ namespace SvichEx
 
         private void btnSave_Clicked(object sender, EventArgs e)
         {
+            ((Button)sender).IsEnabled = false;
             SaveSettings();
+            PopulateData();
+            ((Button)sender).IsEnabled = true;
             Navigation.PopAsync();
             Navigation.PushAsync(new MainPage());
         }
@@ -199,30 +211,7 @@ namespace SvichEx
 
         }
 
-        private void PopulateData(List<SettingItem> lst)
-        {
-            
-            int i = 1;
-
-            foreach (var item in lst)
-            {
-                ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
-                ctlnickname = grdControls.FindByName<Editor>(nickName + i.ToString());
-                ctlScn = grdControls.FindByName<StackLayout>(scn + i.ToString());
-                ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
-
-                if (item != null)
-                {
-                    ctldeviceCode.Text = item.DeviceCode;
-                    ctlnickname.Text = item.NickName;
-                    ctlScn.IsVisible = item.IsVisible;
-                    ctllbl.Text = item.Id.ToString();
-                }
-
-                i++;
-            }
-
-        }
+       
         private void tglScanView_Toggled(object sender, ToggledEventArgs e)
         {
             Switch sw = (Switch)(sender);
@@ -234,9 +223,10 @@ namespace SvichEx
         {
             Button btn = (Button)sender;
             ZXingScannerView scnner = (ZXingScannerView)btn.BindingContext;
+
+            scnner.IsVisible = true;
             scnner.IsScanning = true;
-
-
+            btn.IsVisible = false;
 
         }
 

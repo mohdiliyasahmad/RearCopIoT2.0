@@ -42,4 +42,16 @@ namespace RearCop.Common
 
        
     }
+
+    public class AdaFruitRequest
+    {
+        public string start_time { get; set; }
+        public string end_time { get; set; }
+        public string limit { get; set; }
+        public string include { get; set; }
+        public string before { get; set; }
+
+    }
+
+
 }

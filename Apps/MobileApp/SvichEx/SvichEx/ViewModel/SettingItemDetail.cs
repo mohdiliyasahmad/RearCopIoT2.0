@@ -34,7 +34,6 @@ namespace SvichEx.ViewModel
         public bool IsScheduler { get; set; }
         public string DeviceCode { get; set; }
         public bool IsVisible { get; set; }
-
     }
 
 }
