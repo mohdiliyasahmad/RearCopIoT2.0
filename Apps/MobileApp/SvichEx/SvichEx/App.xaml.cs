@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace SvichEx
 {
@@ -15,7 +16,8 @@ namespace SvichEx
     {
         static AppSettingDatabase database;
         static RestService appService;
-      
+        Task<List<SettingItem>> obj;
+
         public const string ApiUrl = "https://rciot.azure-api.net/gateway/";
  
         public static AppSettingDatabase Database
@@ -64,14 +66,13 @@ namespace SvichEx
         public App()
         {
             InitializeComponent();
+            AppCongiguration();
             MainPage = new NavigationPage(new MainPage());
-
         }
 
         protected override void OnStart()
         {
-            var obj = Database.GetItems();
-            Application.Current.Properties["tabs"] = obj;
+            //AppCongiguration();
         }
 
         protected override void OnSleep()
@@ -81,10 +82,14 @@ namespace SvichEx
 
         protected override void OnResume()
         {
-            var obj = Database.GetItems();
-            Application.Current.Properties["tabs"] = obj;
+            AppCongiguration();
             // App enters the foreground so start our stopwatch again.
         }
 
+        private void AppCongiguration()
+        {
+            obj = Database.GetItems();
+            Application.Current.Properties["tabs"] = obj;
+        }
     }
 }

@@ -6,329 +6,294 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
              xmlns:local="clr-namespace:SvichEx.ViewModel"
              mc:Ignorable="d"
-             x:Class="SvichEx.SettingPage">
+             x:Class="SvichEx.SettingPage" BackgroundColor="DarkSlateGray">
+    
 
     <ContentPage.BindingContext>
         <local:SettingViewModel/>
     </ContentPage.BindingContext>
-
-    <StackLayout BackgroundColor="DarkSlateGray">
-        <Label Text="Home Setting" 
-               HorizontalOptions="CenterAndExpand" 
-               VerticalOptions="CenterAndExpand" FontSize="Title"  TextColor="White" />
+        
+    <StackLayout  CompressedLayout.IsHeadless="true">
+        <Label Text="Room configuration"  
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand" TextColor="White" />
 
         <ScrollView FlowDirection="LeftToRight" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <StackLayout x:Name="grdControls">
-              
-                <StackLayout x:Name="secRoom1">
-                    <Label Text="Room 1" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+            <StackLayout x:Name="grdControls" CompressedLayout.IsHeadless="true">
+                <Grid FlowDirection="LeftToRight" Margin="5" x:Name="secRoom1">
+                    <Grid.RowDefinitions>
 
-                        <Label x:Name="lblId1" Grid.Column="0" 
-                               Grid.Row="1"  IsVisible="False" ></Label>
-                                          
-                        <Editor x:Name="txtDeviceCode1" Placeholder="Device Code..." 
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Room 1" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
+                    <Label x:Name="lblId1" Grid.Column="0" Grid.Row="1"  IsVisible="False" ></Label>
+
+                    <Editor x:Name="txtDeviceCode1" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 FontSize="Micro" TextColor="White"   />
-                        
-                        <Editor x:Name="txtScanView1" 
+
+                    <Editor x:Name="txtScanView1" 
                                 Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode1}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode1}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                                 FontSize="Micro"  Text="Switches..." 
                                 TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
+                </Grid>
+                <Grid FlowDirection="LeftToRight" Margin="5" x:Name="secRoom2" IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                <StackLayout x:Name="secRoom2"  IsVisible="false">
-                    <Label Text="Room 2" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="50">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                        <Label x:Name="lblId2" Grid.Column="0" 
+                    <Label Text="Room 2" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
+
+                    <Label x:Name="lblId2" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
 
-                        <Editor x:Name="txtDeviceCode2" Placeholder="Device Code..." 
+                    <Editor x:Name="txtDeviceCode2" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 FontSize="Micro" TextColor="White" />
 
-                        <Editor x:Name="txtScanView2" Grid.Column="1"  Grid.ColumnSpan="2"
+                    <Editor x:Name="txtScanView2" Grid.Column="1"  Grid.ColumnSpan="2"
                                 Grid.Row="2" 
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode2}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode2}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                           FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
-                <StackLayout x:Name="secRoom3"  IsVisible="false">
-                    <Label Text="Room 3" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid FlowDirection="LeftToRight" Margin="5"  x:Name="secRoom3"  IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                        <Label x:Name="lblId3" Grid.Column="0" 
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="50">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Room 3" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
+
+                    <Label x:Name="lblId3" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
 
-                        <Editor x:Name="txtDeviceCode3" Placeholder="Device Code..." 
+                    <Editor x:Name="txtDeviceCode3" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 FontSize="Micro" TextColor="White" />
 
-                        <Editor x:Name="txtScanView3" Grid.Column="1" 
+                    <Editor x:Name="txtScanView3" Grid.Column="1" 
                                 Grid.Row="2"  Grid.ColumnSpan="2"
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode3}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode3}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                           FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
-                <StackLayout x:Name="secRoom4"  IsVisible="false">
-                    <Label Text="Room 4" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid FlowDirection="LeftToRight" Margin="5" x:Name="secRoom4"  IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                        <Label x:Name="lblId4" Grid.Column="0" 
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="50">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Room 4" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
+
+                    <Label x:Name="lblId4" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
 
-                        <Editor x:Name="txtDeviceCode4" Placeholder="Device Code..." 
+                    <Editor x:Name="txtDeviceCode4" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3" 
                                 FontSize="Micro" TextColor="White" />
 
-                        <Editor x:Name="txtScanView4" Grid.Column="1" 
+                    <Editor x:Name="txtScanView4" Grid.Column="1" 
                                 Grid.Row="2"  Grid.ColumnSpan="2"
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode4}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode4}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                           FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
-                <StackLayout x:Name="secRoom5"  IsVisible="false">
-                    <Label Text="Room 5" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid FlowDirection="LeftToRight" Margin="5"  x:Name="secRoom5"  IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                        <Label x:Name="lblId5" Grid.Column="0" 
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="50">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Room 5" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
+
+                    <Label x:Name="lblId5" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
 
-                        <Editor x:Name="txtDeviceCode5" Placeholder="Device Code..." 
+                    <Editor x:Name="txtDeviceCode5" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 FontSize="Micro" TextColor="White" />
 
-                        <Editor x:Name="txtScanView5" Grid.Column="1" 
+                    <Editor x:Name="txtScanView5" Grid.Column="1" 
                                 Grid.Row="2"  Grid.ColumnSpan="2"
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode5}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode5}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                           FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
-                <StackLayout x:Name="secRoom6"  IsVisible="false">
-                    <Label Text="Room 6" TextColor="GreenYellow"></Label>
-                    <Grid FlowDirection="LeftToRight" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="Auto">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="50">
-                            </ColumnDefinition>
-                            <ColumnDefinition Width="75">
-                            </ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid FlowDirection="LeftToRight" Margin="5" x:Name="secRoom6"  IsVisible="false">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="50">
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="75">
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Room 6" TextColor="GreenYellow" Grid.Column="0" Grid.Row="0"  Grid.ColumnSpan="4"></Label>
 
-                        <Label x:Name="lblId6" Grid.Column="0" 
+                    <Label x:Name="lblId6" Grid.Column="0" 
                                Grid.Row="1"  IsVisible="False" ></Label>
 
-                        <Editor x:Name="txtDeviceCode6" Placeholder="Device Code..." 
+                    <Editor x:Name="txtDeviceCode6" Placeholder="Device Code..." 
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 FontSize="Micro" TextColor="White" />
 
-                        <Editor x:Name="txtScanView6" Grid.Column="1" 
+                    <Editor x:Name="txtScanView6" Grid.Column="1" 
                                 Grid.Row="2"  Grid.ColumnSpan="2"
                                 Placeholder="Bedroom, Livingroom, Guestroom" TextColor="White" 
                         PlaceholderColor="SlateGray"></Editor>
 
-                        <Button BindingContext="{x:Reference Name=txtDeviceCode6}" 
+                    <Button BindingContext="{x:Reference Name=txtDeviceCode6}" 
                                 Grid.Row="2" Grid.Column="3" HorizontalOptions="End" 
                           FontSize="Micro"  Text="Switches..."  TextColor="White" BackgroundColor="SlateGray" Clicked="Command_Clicked"></Button>
 
-                       
-                    </Grid>
-                    <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                </StackLayout>
 
+                </Grid>
             </StackLayout>
         </ScrollView>
-        <StackLayout>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto">
-                    </ColumnDefinition>
-                    <ColumnDefinition Width="Auto">
-                    </ColumnDefinition>
-            
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-                <zxing:ZXingScannerView Grid.Row="0" Grid.Column="0" x:Name="scanView1"  IsVisible="false"
-                                        Grid.RowSpan="2" WidthRequest="200" HeightRequest="200" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto">
+                </ColumnDefinition>
+                <ColumnDefinition Width="Auto">
+                </ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+
+            <zxing:ZXingScannerView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                    x:Name="scanView1"  
+                                        IsVisible="false"
+                                        WidthRequest="150" 
+                                        HeightRequest="150" 
                                         OnScanResult="scanView1_OnScanResult"
                                         IsEnabled="False" 
                                         IsAnalyzing="False"
                                         IsScanning="True" 
                                         />
-                <Button BindingContext="{x:Reference Name=scanView1}" x:Name="btnScanView1"  Grid.RowSpan="2" WidthRequest="200" HeightRequest="200"
-                        Grid.Column="0" Grid.Row="0" Text="Scan" Clicked="btnScanView_Clicked"
+            <Button x:Name="btnScanView1" WidthRequest="150" HeightRequest="150"
+                        Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                    Text="Scan Device QR Code" Clicked="btnScanView_Clicked"
                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Button>
-                
 
-                <StackLayout HorizontalOptions="Center" Grid.Column="2">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Text="Add New Room" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked">
-
-                        </Button>
-                        <Button  x:Name="btnDelete"  Grid.Row="1" HorizontalOptions="FillAndExpand"
-                                 Text="Delete Last Room" TextColor="White" BackgroundColor="Red"
-                                 Clicked="btnDelete_Clicked" BindingContext="{x:Reference Name=secRoom6}"  Grid.Column="0"></Button>
-
-
-                    </Grid>
-                </StackLayout>
-
-
-            </Grid>
-
-        </StackLayout>
-            <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition>
-
-                </ColumnDefinition>
-                <ColumnDefinition>
-
-                </ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" Text="Cancel"  BackgroundColor="Red" CornerRadius="60" Clicked="btnCancel_Clicked"></Button>
-            <Button Grid.Row="0" Grid.Column="2" Text="Save"  BackgroundColor="Green" CornerRadius="60" Clicked="btnSave_Clicked"></Button>
+            <Button Text="Add New Room" HorizontalOptions="StartAndExpand" Clicked="Button_Clicked" Grid.Row="0" Grid.Column="1"></Button>
+            <Button  x:Name="btnDelete"  HorizontalOptions="StartAndExpand"
+                     Text="Delete Last Room" 
+                     TextColor="White" 
+                     BackgroundColor="Red"
+                     Clicked="btnDelete_Clicked" 
+                     BindingContext="{x:Reference Name=secRoom6}" Grid.Row="1" Grid.Column="1"></Button>
         </Grid>
 
+        <Button Text="Save" BackgroundColor="Green" CornerRadius="60" Clicked="btnSave_Clicked"></Button>
+        <Button Text="Cancel" BackgroundColor="Red" CornerRadius="60" Clicked="btnCancel_Clicked"></Button>
         <Label x:Name="lblError" Text="error" TextColor="Red" HorizontalOptions="StartAndExpand"></Label>
         <Label x:Name="lblVersion" Text="Version : 1.0" TextColor="Green" HorizontalOptions="EndAndExpand"></Label>
 
     </StackLayout>
-
+   
 </ContentPage>

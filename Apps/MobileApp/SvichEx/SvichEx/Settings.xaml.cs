@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using ZXing.Net.Mobile.Forms;
 using Xamarin.Forms.Markup;
 using ZXing.Mobile;
+using Xamarin.Forms.Xaml;
 
 namespace SvichEx
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingPage : ContentPage
     {
 
@@ -25,13 +27,12 @@ namespace SvichEx
         Editor ctlnickname;
         Editor ctldeviceCode;
         Label ctllbl;
-        StackLayout ctlScn;
+        Grid ctlScn;
 
         string deviceCode = "txtDeviceCode";
         string nickName = "txtScanView";
         string lblid = "lblId";
         string scn = "secRoom";
-
 
 
         public SettingPage()
@@ -45,16 +46,7 @@ namespace SvichEx
             base.OnAppearing();
             lblError.Text = "";
 
-            var options = new MobileBarcodeScanningOptions
-            {
-                AutoRotate = true,
-                UseNativeScanning = true,
-                TryHarder = true,
-                TryInverted = true,
-                UseFrontCameraIfAvailable = true
-            };
-
-            scanView1.Options = options;
+            InitScanner();
 
             if (App.IsInternetAvailable)
             {
@@ -66,19 +58,34 @@ namespace SvichEx
             }
         }
 
+        public void InitScanner()
+        {
+            var options = new MobileBarcodeScanningOptions
+            {
+                AutoRotate = true,
+                UseNativeScanning = true,
+                TryHarder = true,
+                TryInverted = true,
+                UseFrontCameraIfAvailable = false,
+            };
+
+            scanView1.Options = options;
+        }
+
         public void scanView1_OnScanResult(Result result)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 for (int i = 6; i > 0; i--)
                 {
-                    ctlScn = grdControls.FindByName<StackLayout>(scn + i.ToString());
+                    ctlScn = grdControls.FindByName<Grid>(scn + i.ToString());
                     ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
                     
                     if (ctlScn.IsVisible)
                     {
                         ctldeviceCode.Text = result.Text;
                         btnScanView1.IsVisible = true;
+
                         scanView1.IsScanning = false;
                         scanView1.IsAnalyzing = false;
                         scanView1.IsVisible = false;
@@ -104,9 +111,7 @@ namespace SvichEx
                 }
                 
                 SaveSettings();
-               
                 settingItem.DeviceCode = string.IsNullOrEmpty(lbl.Text) ? "No Device" : lbl.Text;
-                Navigation.PopAsync();
                 Navigation.PushAsync(new SettingDetails(settingItem));
             }
             else
@@ -137,7 +142,6 @@ namespace SvichEx
             PopulateData();
             ((Button)sender).IsEnabled = true;
             Navigation.PopAsync();
-            Navigation.PushAsync(new MainPage());
         }
 
         private void SaveSettings()
@@ -149,7 +153,7 @@ namespace SvichEx
                 {
                     ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
                     ctlnickname = grdControls.FindByName<Editor>(nickName + i.ToString());
-                    ctlScn = grdControls.FindByName<StackLayout>(scn + i.ToString());
+                    ctlScn = grdControls.FindByName<Grid>(scn + i.ToString());
                     ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
 
                     settingItem = new SettingItem();
@@ -195,7 +199,7 @@ namespace SvichEx
             {
                 ctldeviceCode = grdControls.FindByName<Editor>(deviceCode + i.ToString());
                 ctlnickname = grdControls.FindByName<Editor>(nickName + i.ToString());
-                ctlScn = grdControls.FindByName<StackLayout>(scn + i.ToString());
+                ctlScn = grdControls.FindByName<Grid>(scn + i.ToString());
                 ctllbl = grdControls.FindByName<Label>(lblid + i.ToString());
 
                 if (item != null)
@@ -222,20 +226,21 @@ namespace SvichEx
         private void btnScanView_Clicked(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            ZXingScannerView scnner = (ZXingScannerView)btn.BindingContext;
+          
+            InitScanner();
 
-            scnner.IsVisible = true;
-            scnner.IsScanning = true;
+            scanView1.IsVisible = true;
+            scanView1.IsScanning = true;
             btn.IsVisible = false;
 
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            StackLayout scnRoom;
+            Grid scnRoom;
             for (int i = 2; i < 7; i++)
             {
-                scnRoom = grdControls.FindByName<StackLayout>("secRoom" + i.ToString());
+                scnRoom = grdControls.FindByName<Grid>("secRoom" + i.ToString());
                 if (!scnRoom.IsVisible)
                 {
                     scnRoom.IsVisible = true;
@@ -249,10 +254,10 @@ namespace SvichEx
         private void btnDelete_Clicked(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            StackLayout scnRoom;
+            Grid scnRoom;
             for (int i = 6; i > 1; i--)
             {
-                scnRoom = grdControls.FindByName<StackLayout>("secRoom" + i.ToString());
+                scnRoom = grdControls.FindByName<Grid>("secRoom" + i.ToString());
                 if (scnRoom.IsVisible)
                 {
                     scnRoom.IsVisible = false;

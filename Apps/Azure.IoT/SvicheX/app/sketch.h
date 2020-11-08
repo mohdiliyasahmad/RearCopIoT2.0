@@ -44,7 +44,7 @@ int dBmtoPercentage(int dBm)
 void initWifi()
 {
  
-  wifiManager.autoConnect(string2char("SvichEx.4C"));
+  wifiManager.autoConnect(string2char("RC-4C"));
   //wifiManager.resetSettings();
  
   while (WiFi.status() != WL_CONNECTED) {
@@ -94,7 +94,7 @@ void registerDevice()
     }
     else
     {
-       ESP.restart();
+       while (1);
     }
     http.end(); //Close connection
  
@@ -122,7 +122,7 @@ void getDeviceDefaults()
     else
     {
       Serial.println("Device end point not found");
-      ESP.restart();
+      while (1);
     }
   http.end(); //Close connection
  
@@ -141,11 +141,13 @@ void DeviceReset()
     {
       ESP.restart();
     }  
-  
+
+  /*
     if (currentMillis - startMillis >= 86400000)
     {
        ESP.restart();
     }
+  */
 
 }
 

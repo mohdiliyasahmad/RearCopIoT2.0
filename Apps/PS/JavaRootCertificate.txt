@@ -1,0 +1,1 @@
+setx _JAVA_OPTIONS -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT

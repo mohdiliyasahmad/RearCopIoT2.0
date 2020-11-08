@@ -1,4 +1,5 @@
-﻿using SvichEx.DbRepository;
+﻿using Android.Provider;
+using SvichEx.DbRepository;
 using SvichEx.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,6 @@ namespace SvichEx
         Switch tglSwitch;
         SettingItemDetail settingItemDetail = null;
         Editor txtEdit;
-      
-
         public SettingItem DeviceSetting { get; set; }
         Task<List<SettingItemDetail>> swiches;
         Task<List<SettingItemDetail>> swichesTemp;
@@ -32,7 +31,6 @@ namespace SvichEx
         {
             InitializeComponent();
             DeviceSetting = settingItem;
-
             txtDeviceCode.Text = "for device \"" + DeviceSetting.DeviceCode + "\"";
             lblError.Text = "";
         }
@@ -83,7 +81,6 @@ namespace SvichEx
                     else
                     {
                         settingItemDetail = SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id);
-                        //swiches.Result.Add(SwitchDetail(txtEntry.Text, tglSwitch.IsToggled, entry + i.ToString(), tgl + i.ToString(), Id));
                     }
 
                     settingItemDetail.SettingId = DeviceSetting.Id;

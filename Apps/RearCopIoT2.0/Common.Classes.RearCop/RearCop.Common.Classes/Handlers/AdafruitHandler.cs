@@ -108,25 +108,18 @@ namespace RearCop.Common
             List<AdaFruitModel> objResponse = new List<AdaFruitModel>();
 
             appHttpClient.DefaultRequestHeaders.Remove("X-AIO-Key");
-            appHttpClient.DefaultRequestHeaders.Remove("Content-Type");
             appHttpClient.DefaultRequestHeaders.Add("X-AIO-Key", mqttKey);
-            appHttpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
             try
             {
 
-                var response = appHttpClient.GetAsync(mqttURL + "/" + mqttUserName+ "/groups/" + deviceId + "/feeds/"+ feedName+"/data").Result;
-
+                
+                var response = appHttpClient.GetAsync(mqttURL + mqttUserName+ "/groups/" + deviceId + "/feeds/"+ feedName+"/data").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    try
-                    {
-                        using var responseStream = response.Content.ReadAsStreamAsync().Result;
+                   
+                        var responseStream = response.Content.ReadAsStreamAsync().Result;
                         objResponse = appUtilities.DeSerializeAdafruitFeedListObject(responseStream);
-                    }
-                    catch
-                    {
-                        return objResponse;
-                    }
+
                 }
 
                 return objResponse;

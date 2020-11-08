@@ -50,7 +50,7 @@ int dBmtoPercentage(int dBm)
 void initWifi()
 {
   startMillis = millis();  //initial start time
-  wifiManager.autoConnect(string2char("RCSense" + ESP.getChipId()));
+  wifiManager.autoConnect(string2char(ESP.getChipId()));
  
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");

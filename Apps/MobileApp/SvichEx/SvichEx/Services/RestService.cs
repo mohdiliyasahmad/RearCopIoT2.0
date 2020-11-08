@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace SvichEx.Services
 {
@@ -33,7 +28,7 @@ namespace SvichEx.Services
             try
             {
 
-                var response = await client.GetAsync(url).ConfigureAwait(false);
+                var response = await client.GetAsync(url);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {

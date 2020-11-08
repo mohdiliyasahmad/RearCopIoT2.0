@@ -22,11 +22,7 @@
 
         public List<AdaFruitModel> DeSerializeAdafruitFeedListObject(Stream responseStream)
         {
-            var serializeOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            return JsonSerializer.DeserializeAsync<List<AdaFruitModel>>(responseStream, serializeOptions).Result;
+            return JsonSerializer.DeserializeAsync<List<AdaFruitModel>>(responseStream).Result;
         }
 
         public AdaFruitModel DeSerializeAdafruitObject(Stream responseStream)

@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using SvichEx.DbRepository;
-using SvichEx.Services;
 using SvichEx.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +18,8 @@ namespace SvichEx
         public string DeviceCode { get; set; }
         public bool IsDeviceEnabled { get; set; }
 
+        public bool IsDefault { get; set; }
+
         public Task<List<SettingItem>> Tabs { get; set; }
 
         public Task<List<SettingItemDetail>> Swiches;
@@ -31,16 +30,45 @@ namespace SvichEx
 
         public ReturnModel OnSwitches { get; set; }
 
+
+        string lbl = "txtSwitch", tgl = "swhSwitch";
+        int ctr = 1;
+        Label ctlLbl;
+        Switch ctlSwitch;
+        Button ctlBtn;
+        string btnid = "btnTab";
+        int i = 1;
+        bool isTgl;
+        object o;
+
+        string pin = string.Empty;
+        int value;
+
+        private bool _isRunning;
+
+
+
         public MainPage()
         {
             OnSwitches = new ReturnModel();
             InitializeComponent();
+
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                if (page.GetType().Name != "MainPage")
+                {
+                    Navigation.RemovePage(page);
+                }
+            }
+
+
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            lblError.Text = "";
+            ResetElements();
             try
             {
                 if (App.IsInternetAvailable)
@@ -56,6 +84,7 @@ namespace SvichEx
             {
                 lblError.Text = ex.Message;
             }
+
         }
 
         private void PopulateSwitchesByDeviceCode()
@@ -67,10 +96,6 @@ namespace SvichEx
 
         private void PopulateElements(Task<List<SettingItemDetail>> swiches)
         {
-            string lbl = "txtSwitch", tgl = "swhSwitch";
-            int ctr = 1;
-            Label ctlLbl;
-            Switch ctlSwitch;
 
             for (ctr = 1; ctr < 9; ctr++)
             {
@@ -116,11 +141,7 @@ namespace SvichEx
             {
 
                 Tabs = (Task<List<SettingItem>>)Application.Current.Properties["tabs"];
-
-                Button ctlBtn;
-                string btnid = "btnTab";
-
-                int i = 1;
+                i = 1;
 
                 foreach (var item in Tabs.Result)
                 {
@@ -141,7 +162,10 @@ namespace SvichEx
                 }
 
                 ctlBtn = grdControls.FindByName<Button>(btnid + "1");
-                SetTab(ctlBtn);
+
+                Application.Current.Properties["btn"] = ctlBtn;
+
+                SetTab(ctlBtn,true);
             }
             catch (Exception)
             {
@@ -152,7 +176,6 @@ namespace SvichEx
 
         private void Setting_Pressed(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
             Navigation.PushAsync(new SettingPage());
         }
 
@@ -163,9 +186,11 @@ namespace SvichEx
             {
                 if (App.IsInternetAvailable)
                 {
+                    Application.Current.Properties["btn"] = ((Button)sender);
+
                     DeviceCode = ((Button)sender).ClassId;
                     IsDeviceEnabled = false;
-                    SetTab((Button)sender);
+                    SetTab((Button)sender,false);
                 }
                 else
                 {
@@ -200,27 +225,32 @@ namespace SvichEx
             btnTab6.TextColor = Color.White;
 
             lblError.Text = "";
-            lblStatus.Text = "";
-            lblStatus.IsVisible = false;
+            lblStatus.IsVisible = true;
+            
+            lblStatus.TextColor = Color.GreenYellow;
+            lblStatus.HorizontalOptions = LayoutOptions.Start;
+            lblStatus.Text = "Device Online";
+
         }
 
-        private void SetTab(Button ctlBtn)
+        private void SetTab(Button ctlBtn, bool isOnline=false)
         {
             try
             {
                 ResetElements();
                 ctlBtn.BackgroundColor = Color.Red;
 
-                if (Tabs.Result.Count > 0)
+                if (Tabs.Result.Count > 0 )
                 {
                     lblStatus.IsVisible = true;
+                    lblStatus.TextColor = Color.Red;
+                    lblStatus.HorizontalOptions = LayoutOptions.Start;
                     lblStatus.Text = "Checking device oneline status, please wait...";
                 }
-                DeviceCode = ctlBtn.ClassId;
-                _ = SetDeviceOnlineStatusAsync(ctlBtn);
-                PopulateSwitchesByDeviceCode();
-                SetToggleButtonOnlineStatus();
 
+                DeviceCode = ctlBtn.ClassId;
+                PopulateSwitchesByDeviceCode();
+                RunTimer();
             }
             catch (Exception ex)
             {
@@ -229,23 +259,19 @@ namespace SvichEx
 
         }
 
+
         private void SetToggleButtonOnlineStatus()
         {
             if (!string.IsNullOrEmpty(DeviceCode))
             {
                 ObjSwitches = App.AppService.GetSwitches(DeviceCode);
-                
+
                 if (ObjSwitches.Result != null)
                 {
                     OnSwitches = JsonConvert.DeserializeObject<ReturnModel>(ObjSwitches.Result);
                 }
 
-                Switch ctlSwitch;
-
-                string tgl = "swhSwitch";
-                int ctr = 1;
-                var isTgl = false;
-                object o;
+                IsDefault = true;
 
                 props = OnSwitches.GetType().GetProperties();
 
@@ -270,6 +296,8 @@ namespace SvichEx
                         }
                     }
                 }
+                IsDefault = false;
+                _isRunning = false;
             }
 
         }
@@ -277,8 +305,7 @@ namespace SvichEx
         private async Task SetDeviceOnlineStatusAsync(Button ctlBtn)
         {
             Tabs = (Task<List<SettingItem>>)Application.Current.Properties["tabs"];
-            var buttonText = Tabs.Result.Find(f => f.NickName == ctlBtn.Text && f.DeviceCode == DeviceCode);
-
+       
             ctlBtn.BackgroundColor = Color.Red;
 
             try
@@ -286,28 +313,29 @@ namespace SvichEx
 
                 if (!string.IsNullOrEmpty(DeviceCode))
                 {
-                    IsDeviceEnabled = await App.AppService.GetDeviceStatusAsync(DeviceCode);
+                    IsDeviceEnabled = await App.AppService.GetDeviceStatusAsync(DeviceCode);// ConfigureAwait(false);
                 }
 
                 if (IsDeviceEnabled)
                 {
                     ctlBtn.BackgroundColor = Color.Green;
-                    lblStatus.Text = "";
-                    lblStatus.IsVisible = false;
+                    lblStatus.TextColor = Color.GreenYellow;
+                    lblStatus.HorizontalOptions = LayoutOptions.Start;
+                    lblStatus.Text = "Device Online";
                 }
             }
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
-                //throw;
             }
         }
 
+
         private void swhSwitch_Toggled(object sender, ToggledEventArgs e)
         {
-            var tgl = (Switch)sender;
-            var pin = tgl.ClassId;
-            var value = tgl.IsToggled ? 1 : 0;
+            ctlSwitch = (Switch)sender;
+            pin = ctlSwitch.ClassId;
+            value = ctlSwitch.IsToggled ? 1 : 0;
             Task<bool> returnValue;
             lblError.Text = "";
 
@@ -315,22 +343,48 @@ namespace SvichEx
             {
                 if (App.IsInternetAvailable)
                 {
-                    returnValue = App.AppService.SwitchOnOff(pin, value, DeviceCode);
+                    if (!IsDefault)
+                    {
+                        returnValue = App.AppService.SwitchOnOff(pin, value, DeviceCode);
+                    }
                 }
                 else
                 {
                     lblError.Text = "No internet dectected";
                 }
+
             }
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
-                tgl.IsEnabled = true;
+                ctlSwitch.IsEnabled = true;
             }
         }
 
 
+        public void RunTimer()
+        {
+            _isRunning = true;
+            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), TimerCallBack);
+        }
 
+       
+        private bool TimerCallBack()
+        {
+            try
+            {
+                _ = SetDeviceOnlineStatusAsync((Button)Application.Current.Properties["btn"]);
+                SetToggleButtonOnlineStatus();
+                return _isRunning;
+            }
+            catch (Exception)
+            {
+                _isRunning = false;
+                throw;
+            }
+      
+            
+        }
 
     }
 }

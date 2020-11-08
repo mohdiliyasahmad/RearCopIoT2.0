@@ -135,12 +135,13 @@ namespace Gateway.RearCop.Controllers
            
         }
 
-         [Route("ReadFromDeice")]
-        public List<AdaFruitModel> ReadFromDeice(AdaFruitRequest request)
+        [Route("ReadFromDevice")]
+        [HttpGet]
+        public List<AdaFruitModel> ReadFromDevice()
         {
             try
             {
-                return D2ClDeviceServiceAsync("SendC2D",request);
+                return D2ClDeviceServiceAsync();
             }
             catch (System.Exception ex)
             {
@@ -268,14 +269,13 @@ namespace Gateway.RearCop.Controllers
         }
 
 
-        private List<AdaFruitModel> D2ClDeviceServiceAsync(
-            string method, 
-            AdaFruitRequest requestParam)
+        private List<AdaFruitModel> D2ClDeviceServiceAsync()
         {
             GetHttpClient();
+           
             List<AdaFruitModel> objResponce = new List<AdaFruitModel>();
 
-            var response = ClientHttp.GetAsync(AppConfig.DeviceEndpoint).Result; 
+            var response = ClientHttp.GetAsync(AppConfig.DeviceD2CEndpoint).Result; 
           
             if (response.IsSuccessStatusCode)
             {

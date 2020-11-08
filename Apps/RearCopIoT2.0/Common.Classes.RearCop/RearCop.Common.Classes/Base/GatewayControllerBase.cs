@@ -53,10 +53,9 @@ namespace RearCop.Common
         {
             ReturnResult = string.Empty;
             Response.StatusCode = StatusCodes.Status200OK;
-
             DeviceID = HttpContext.Request.Headers["deviceid"];
             ServiceKey = HttpContext.Request.Headers["apikey"];
-
+        
             if (string.IsNullOrEmpty(DeviceID))
             {
                 ReturnResult = "device id not found";

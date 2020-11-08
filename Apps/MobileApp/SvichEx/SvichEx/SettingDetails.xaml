@@ -7,22 +7,9 @@
              x:Class="SvichEx.SettingDetails">
     <ContentPage.Content>
         <StackLayout BackgroundColor="DarkSlateGray" >
-            <StackLayout>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition>
-
-                        </ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Text="Your switch names" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Title" TextColor="White" />
-                    <Label x:Name="txtDeviceCode" Grid.Row="1" Text="for device" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Title" TextColor="White" />
-                 </Grid>
-                
-            </StackLayout>
+        
+            <Label Text="Your switch names" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="White" />
+            <Label x:Name="txtDeviceCode"  Text="for device" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Title" TextColor="White" />
             
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <StackLayout VerticalOptions="Center">
@@ -70,27 +57,12 @@
 
                         </Grid>
                     </ScrollView>
-
-                    <StackLayout>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition>
-
-                                </ColumnDefinition>
-                                <ColumnDefinition>
-
-                                </ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="btnCancel" Grid.Row="0" Grid.Column="1" Text="Cancel"  BackgroundColor="Red"  Clicked="btnCancel_Clicked" CornerRadius="60"></Button>
-                            <Button x:Name="btnSave" Grid.Row="0" Grid.Column="2" Text="Save"  BackgroundColor="Green" Clicked="btnSave_Clicked" CornerRadius="60"></Button>
-                        </Grid>
-                    </StackLayout>
-
                 </StackLayout>
             </StackLayout>
+
+            <Button x:Name="btnSave" Text="Save"  BackgroundColor="Green" Clicked="btnSave_Clicked" CornerRadius="60"></Button>
+            <Button x:Name="btnCancel" Text="Cancel"  BackgroundColor="Red"  Clicked="btnCancel_Clicked" CornerRadius="60"></Button>
+            
             <Label x:Name="lblError" Text="error" TextColor="Red" HorizontalOptions="StartAndExpand"></Label>
             <Label x:Name="lblVersion" Text="Version : 1.0" TextColor="Green" HorizontalOptions="EndAndExpand"></Label>
 

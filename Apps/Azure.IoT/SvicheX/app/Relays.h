@@ -36,10 +36,8 @@ void initRelays()
   digitalWrite(Relay7, LOW);
 */
 
-  digitalWrite(Relay0, LOW); 
+  digitalWrite(Relay0, HIGH); 
   digitalWrite(Relay1, HIGH); 
-   
-  
 
 }
 
@@ -50,41 +48,41 @@ void ControlRelay(char *payload)
 
   Serial.println(String(payload));
   
-    if(root["v1"]=="1")
+    if(root["v1"]=="0")
     {
        digitalWrite(Relay4, HIGH);
     }
     
-    if(root["v1"]=="0")
+    if(root["v1"]=="1")
     {
        digitalWrite(Relay4, LOW);
     }
 
-    if(root["v2"]=="1")
+    if(root["v2"]=="0")
     {
        digitalWrite(Relay5, HIGH);
     }
-    if(root["v2"]=="0")
+    if(root["v2"]=="1")
     {
        digitalWrite(Relay5, LOW);
     }
 
-    if(root["v3"]=="1")
+    if(root["v3"]=="0")
     {
        digitalWrite(Relay6, HIGH);
     }
-    if(root["v3"]=="0")
+    if(root["v3"]=="1")
     {
        digitalWrite(Relay6, LOW);
     }
 
-    if(root["v4"]=="1")
-    {
-       digitalWrite(Relay7, HIGH);
-    }
     if(root["v4"]=="0")
     {
-       digitalWrite(Relay7, LOW);
+       digitalWrite(Relay2, HIGH);
+    }
+    if(root["v4"]=="1")
+    {
+       digitalWrite(Relay2, LOW);
     }
 
     /*

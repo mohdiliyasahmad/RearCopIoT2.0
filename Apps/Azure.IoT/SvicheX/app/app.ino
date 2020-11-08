@@ -65,7 +65,7 @@ void setup() {
   
   initWifi();
   
-  isConnectedToWifi();
+  //isConnectedToWifi();
   //Registring device id
   registerDevice();
   // getting default values
@@ -114,7 +114,7 @@ void loop() {
         {
           Serial.print(F("\nSending deviceping"));
           if (! d2cping.publish(String(deviceId +":IsHardwareConnected").c_str())) {
-            Serial.println(F("Failed"));
+            Serial.println(F("Hardware callback Failed"));
           } else {
             Serial.println(F("Hardware callback success"));
           }
@@ -167,14 +167,14 @@ void MQTT_connect() {
 
   Serial.print("Connecting to MQTT... ");
 
-  uint8_t retries = 100;
+  uint8_t retries = 20000;
   while ((ret = mqtt.connect()) != 0) { // connect will return 0 for connected
        Serial.println(mqtt.connectErrorString(ret));
        Serial.println("Retrying MQTT connection in 5 seconds...");
        digitalWrite(Relay1, LOW);
        digitalWrite(Relay0, HIGH);
        mqtt.disconnect();
-       delay(5000);  // wait 5 seconds
+       delay(2000);  // wait 5 seconds
        retries--;
        if (retries == 0) {
          // basically die and wait for WDT to reset me
